@@ -1,0 +1,8 @@
+{
+  "label": "Model Validation",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Validate the pre-trained model with local dataset."
+  }
+}

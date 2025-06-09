@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p05_get_egfr_stage &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p06_generate_rrt_summary" href="Phenotyping.p06_generate_rrt_summary.html" />
+    <link rel="prev" title="p05_get_CKD_class" href="Phenotyping.p05_get_CKD_class.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p06_generate_rrt_summary.html" title="p06_generate_rrt_summary"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_CKD_class.html" title="p05_get_CKD_class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_get_egfr_stage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p05-get-egfr-stage">
+<h1>p05_get_egfr_stage<a class="headerlink" href="#p05-get-egfr-stage" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p05_get_egfr_stage">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p05_get_egfr_stage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">egfr_value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p05_get_egfr_stage" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is to determine the G-stage of CKD class ([‘G1’, ‘G2’, ‘G3a’, ‘G3b’, ‘G4’, ‘G5’, ‘No staging can be done!’])</p>
+<ol class="arabic simple">
+<li><p>If eGFR value is null, then return No staging can be done!</p></li>
+<li><p>If eGFR value is bigger and equal to than 90, return G1</p></li>
+<li><p>If eGFR value is between 60 and 90, return G2</p></li>
+<li><p>If eGFR value is between 45 and 60, return G3a</p></li>
+<li><p>If eGFR value is between 30 and 45, return G3b</p></li>
+<li><p>If eGFR value is between 15 and 30, return G4</p></li>
+<li><p>If eGFR value is smaller and equal to 15, return G5</p></li>
+<li><p>If none of the condition above satisfy, return null value</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>egfr_value</strong> (<em>float</em>) – egfr value</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>G-stage of CKD</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_get_CKD_class.html"
+                        title="previous chapter">p05_get_CKD_class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p06_generate_rrt_summary.html"
+                        title="next chapter">p06_generate_rrt_summary</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p05_get_egfr_stage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p06_generate_rrt_summary.html" title="p06_generate_rrt_summary"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_CKD_class.html" title="p05_get_CKD_class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_get_egfr_stage</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

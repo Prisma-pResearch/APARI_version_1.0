@@ -1,0 +1,8 @@
+{
+  "label": "Data Preparation",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Prepare your local data with the guidance to generate AI ready datasets."
+  }
+}

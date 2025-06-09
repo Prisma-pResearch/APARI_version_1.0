@@ -1,0 +1,27 @@
+name: EXP
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11.4
+  - pandas=2.1.4
+  - pyodbc=4.0.39  # versions greater than this break pandas.to_sql with sql server
+  - tqdm=4.65.0
+  - unidecode=1.2.0
+  - dask=2023.11.0
+  - cryptography=42.0.5
+  - h5py=3.9.0
+  - openpyxl=3.0.10
+  - pymysql= 1.0.2
+  - pytables=3.9.2
+  - python-dotenv=1.0.1
+  - sqlalchemy=1.4.39  # versions greater than this break pandas.to_sql with sql server
+  - xlsxwriter=3.1.1
+  - scikit-learn=1.4.1.post1
+  - lightning=2.0.9.post0  # for model toolbox
+  - spyder=5.5.1
+  - pyarrow=14.0.2
+  - pip:
+    - cassandra-driver==3.29.0
+    - sql-metadata==2.10.0
+    - flatten-dict==0.4.2

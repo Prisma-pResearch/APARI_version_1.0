@@ -1,0 +1,46 @@
+
+## Please modify the base image based on your CUDA and OS versions
+FROM nvidia/cuda:11.4.3-runtime-ubuntu20.04
+
+# Install OS packages
+RUN apt-get update
+
+RUN apt-get -y install vim git curl
+RUN apt-get -y install unixodbc-dev
+RUN apt-get -y install acl
+RUN apt-get install -y build-essential
+RUN apt-get -y install freetds-bin
+
+# Install Miniconda environment
+RUN apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh 
+
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}""
+RUN conda --version
+
+# Install python packages
+COPY environment.yaml /environment.yaml 
+RUN conda env create -f /environment.yaml
+
+# Configure the Github Token, please use your own
+RUN git config --global url."https://${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+# Clone the GitHub repository
+RUN mkdir /Workspace
+RUN cd /Workspace && git clone --recurse-submodules -j8 https://github.com/Prisma-pResearch/APARI_Federated_Learning.git
+RUN git config --global --unset url."https://${GITHUB_TOKEN}@github.com/".insteadOf
+
+RUN wget "https://www.dropbox.com/scl/fi/nhic7glrw91uu6n7m59on/adi_condensed.csv?rlkey=5flbq64itv4tty13xaddncfn4&dl=0" -O /Workspace/APARI_Federated_Learning/Resource_Files/adi_condensed.csv
+
+# Set the working directory
+WORKDIR /Workspace/APARI_Federated_Learning
+
+# Set the entrypoint
+ENTRYPOINT ["/bin/bash"]
+

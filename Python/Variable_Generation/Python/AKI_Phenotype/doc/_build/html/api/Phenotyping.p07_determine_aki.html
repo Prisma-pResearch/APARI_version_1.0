@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p07_determine_aki &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p07_find_minimum_creatinine_within_past_days" href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" />
+    <link rel="prev" title="p07_calculate_kegfr" href="Phenotyping.p07_calculate_kegfr.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" title="p07_find_minimum_creatinine_within_past_days"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_calculate_kegfr.html" title="p07_calculate_kegfr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_determine_aki</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p07-determine-aki">
+<h1>p07_determine_aki<a class="headerlink" href="#p07-determine-aki" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p07_determine_aki">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p07_determine_aki</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creatinine</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p07_determine_aki" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>The function is used to determine if patient has aki if one of following conditions is satified:</dt><dd><ul class="simple">
+<li><p>under RRT</p></li>
+<li><p>creatinine &gt;= 4</p></li>
+<li><p>increasement of creatinine within 48 hours is greater than 0.3</p></li>
+<li><p>creatinine / reference creatinine &gt;= 1.5</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li><p>Split the data into two parts, one part is within 7 days admission,
+and another part is greater than 7 days admission (if an encounter do not have creatinine within 7 days admission,
+the first creatinine is treated as within 7 days admission)</p></li>
+<li><p>For data within 7 days admission, use reference creatinine determined when calculating egfr staging (determinined before running this function).</p></li>
+<li><dl class="simple">
+<dt>For data greater than 7 days admission, we determine reference creatinine as</dt><dd><ul class="simple">
+<li><p>if previous avaliable date or current date (date of current datetime) has aki, we use last available creatinine</p></li>
+<li><p>else use minimum creatinine within last 7 days.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>determine aki if one of four conditions is satisfied.</p></li>
+<li><p>update aki flag for current date using the worst aki flag during that day.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>creatinine</strong> (<em>pandas.DataFrame</em>) – creatinine dataframe, must contain following columns:
+* elsp_days
+* under_rrt
+* creatinine_greater_4
+* creatinine_increase_greater_03
+* lab_ref_cr_ration_greater_1_5
+* specimen_date
+* inferred_specimen_datetime
+* reference_creatinine
+* minimum_creatinine_past_7d
+* eid
+This dataframe should be sorted by column [eid, inferred_specimen_datetime]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>creatinine dataframe with updated columns ‘reference_creatinine’ and ‘lab_ref_cr_ration_greater_1_5’; and newly inserted columns ‘aki_flag’.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Can add a floatchart for determining reference creatinine when doing aki determination</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_calculate_kegfr.html"
+                        title="previous chapter">p07_calculate_kegfr</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html"
+                        title="next chapter">p07_find_minimum_creatinine_within_past_days</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p07_determine_aki.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" title="p07_find_minimum_creatinine_within_past_days"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_calculate_kegfr.html" title="p07_calculate_kegfr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_determine_aki</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

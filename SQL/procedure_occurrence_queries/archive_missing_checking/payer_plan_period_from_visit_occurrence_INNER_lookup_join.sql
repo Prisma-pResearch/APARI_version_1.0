@@ -1,0 +1,42 @@
+/******
+payer_plan_period_from_visit_occurrence_INNER_lookup_join Query prepared at 2024-03-13 13:32:28.813564 by query_builder.py
+
+retrieves variables from the following row_ids: 224
+******/
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'parent_visit_occurrence_id') 
+SELECT 
+	C.subject_id,
+	vo.visit_occurrence_id,
+	ppp.payer_plan_period_start_date [payer_plan_period_start_date],
+	ppp.payer_plan_period_end_date [payer_plan_period_end_date],
+	ppp.payer_concept_id [payer]
+ FROM 
+	ReSuLtS_ScHeMa.COHORT c
+	INNER JOIN DaTa_ScHeMa.procedure_occurrence po on po.procedure_occurrence_id = C.subject_id
+	INNER JOIN DaTa_ScHeMa.visit_occurrence vop on vop.visit_occurrence_id = po.visit_occurrence_id
+	INNER JOIN DaTa_ScHeMa.visit_occurrence vo on vo.visit_occurrence_id = vop.parent_visit_occurrence_id
+	INNER JOIN DaTa_ScHeMa.payer_plan_period ppp on (ppp.person_id = vo.person_id AND CONVERT(DATE, vo.parent_visit_start_datetime) BETWEEN ppp.[payer_plan_period_start_date] AND ppp.[payer_plan_period_end_date])
+ WHERE 
+	ppp.payer_plan_period_start_date BETWEEN CONVERT(DATE, vo.parent_visit_start_datetime) AND CONVERT(DATE, vo.parent_visit_end_datetime)
+	AND
+	C.cohort_definition_id = XXXXXX
+	AND
+	C.subset_id = YYYY;
+ELSE
+SELECT 
+	C.subject_id,
+	vo.visit_occurrence_id,
+	ppp.payer_plan_period_start_date [payer_plan_period_start_date],
+	ppp.payer_plan_period_end_date [payer_plan_period_end_date],
+	ppp.payer_concept_id [payer]
+ FROM 
+	ReSuLtS_ScHeMa.COHORT c
+	INNER JOIN DaTa_ScHeMa.procedure_occurrence po on po.procedure_occurrence_id = C.subject_id
+	INNER JOIN DaTa_ScHeMa.visit_occurrence vo on vo.visit_occurrence_id = po.visit_occurrence_id
+	INNER JOIN DaTa_ScHeMa.payer_plan_period ppp on (ppp.person_id = vo.person_id AND CONVERT(DATE, vo.visit_start_datetime) BETWEEN ppp.[payer_plan_period_start_date] AND ppp.[payer_plan_period_end_date])
+ WHERE 
+	ppp.payer_plan_period_start_date BETWEEN CONVERT(DATE, visit_start_datetime) AND CONVERT(DATE, visit_end_datetime)
+	AND
+	C.cohort_definition_id = XXXXXX
+	AND
+	C.subset_id = YYYY;

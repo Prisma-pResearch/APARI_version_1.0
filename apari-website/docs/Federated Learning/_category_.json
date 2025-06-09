@@ -1,0 +1,8 @@
+{
+  "label": "Federated Learning",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Federated Learning is a privacy-preserving machine learning technique that trains an algorithm across multiple decentralized edge devices or servers, without exchanging the training data."
+  }
+}

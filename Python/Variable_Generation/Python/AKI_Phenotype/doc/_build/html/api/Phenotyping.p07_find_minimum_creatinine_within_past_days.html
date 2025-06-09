@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p07_find_minimum_creatinine_within_past_days &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p07_generate_aki" href="Phenotyping.p07_generate_aki.html" />
+    <link rel="prev" title="p07_determine_aki" href="Phenotyping.p07_determine_aki.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_generate_aki.html" title="p07_generate_aki"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_determine_aki.html" title="p07_determine_aki"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_find_minimum_creatinine_within_past_days</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p07-find-minimum-creatinine-within-past-days">
+<h1>p07_find_minimum_creatinine_within_past_days<a class="headerlink" href="#p07-find-minimum-creatinine-within-past-days" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p07_find_minimum_creatinine_within_past_days">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p07_find_minimum_creatinine_within_past_days</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creatinine</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">past_day</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">col_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p07_find_minimum_creatinine_within_past_days" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to find the minimum creatinine within past predefined days.
+For each row with a time point x, and parameter past_day = y, this function find the minimum creatinine within time periods [x - y days, x].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>creatinine</strong> (<em>pandas.DataFrame</em>) – creatinine dataframe, must contain following columns:
+* pid
+* eid
+* lab_result
+* inferred_specimen_datetime</p></li>
+<li><p><strong>past_day</strong> (<em>int</em>) – define the look back window</p></li>
+<li><p><strong>col_name</strong> (<em>str</em>) – column name of the result column</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encounter id column name, default value = ‘’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pandas.DataFrame</em> – filtered creatinine dataframe</p></li>
+<li><p><em>—–</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_determine_aki.html"
+                        title="previous chapter">p07_determine_aki</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_generate_aki.html"
+                        title="next chapter">p07_generate_aki</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p07_find_minimum_creatinine_within_past_days.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_generate_aki.html" title="p07_generate_aki"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_determine_aki.html" title="p07_determine_aki"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_find_minimum_creatinine_within_past_days</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p08_generateTrajectory &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p08_get_dischg_position" href="Phenotyping.p08_get_dischg_position.html" />
+    <link rel="prev" title="p08_cal_mortality" href="Phenotyping.p08_cal_mortality.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p08_get_dischg_position.html" title="p08_get_dischg_position"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p08_cal_mortality.html" title="p08_cal_mortality"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p08_generateTrajectory</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p08-generatetrajectory">
+<h1>p08_generateTrajectory<a class="headerlink" href="#p08-generatetrajectory" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p08_generateTrajectory">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p08_generateTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">in_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">ssdi_name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p08_generateTrajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to generate AKI trajectory groups including ‘pAKI with recovery’ (persistent AKI with renal recovery), ‘pAKI without recovery’ (persistent AKI without renal recovery), ‘non-pAKI with recovery’ (rapidly reversed AKI), and ‘No AKI’.</p>
+<ol class="arabic simple">
+<li><p>Read aki episodes and summary file.</p></li>
+<li><p>Generate indicators of ‘aki_recovery’ and ‘paki’. A patient has aki_recovery if patient has aki and recover by discharge. A patient has paki if patient has at least one episode lasting more than 2 days.</p></li>
+<li><p>Determine discharge place.</p></li>
+<li><dl class="simple">
+<dt>Determine trajectory groups ‘overall_type’ by combining ‘paki’, ‘aki_recovery’ and ‘dischg_place’.</dt><dd><ul class="simple">
+<li><p>A patient has ‘paki without renal recovery’ if 1) patient has paki but no aki_recovery 2) patient has aki, no paki, no aki_recovery, but dishg_place is not home/rehab, we still consider patient has persistent aki without renal recovery.</p></li>
+<li><p>A patient has ‘paki with renal recovery’ if patient has paki and aki_recovery.</p></li>
+<li><p>Other AKI patients without trajectory groups are considered as ‘non-pAKI with recovery’</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Determine akd indicator if patient has aki last longer than 7 days.</p></li>
+<li><p>Save the trajectory file with newly generated columns including ‘overall_type’, ‘aki_recovery’, ‘paki’, ‘akd_greater_than_7_days’,’aki_recovery_undetermined’.</p></li>
+<li><p>Save the encounter file with dischg place and mortality.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> – intermediate directory location</p></li>
+<li><p><strong>in_dir</strong> (<em>str</em>) – input directory location</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encounter id column name, default value = ‘merged_enc_id’</p></li>
+<li><p><strong>pid</strong> (<em>str</em>) – patient id column name, default value = ‘patient_deiden_id’</p></li>
+<li><p><strong>in_batch</strong> (<em>bool</em>) – indicator for batched data, default value = True</p></li>
+<li><p><strong>ssid_name</strong> (<em>str</em>) – file name containing columns ‘pid’ and ‘ssdi_death_date’, default value = np.nan</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p08_cal_mortality.html"
+                        title="previous chapter">p08_cal_mortality</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p08_get_dischg_position.html"
+                        title="next chapter">p08_get_dischg_position</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p08_generateTrajectory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p08_get_dischg_position.html" title="p08_get_dischg_position"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p08_cal_mortality.html" title="p08_cal_mortality"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p08_generateTrajectory</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

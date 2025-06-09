@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p03_add_prev_creatinine_and_egfr_flags &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p04_create_creatinine_parameters" href="Phenotyping.p04_create_creatinine_parameters.html" />
+    <link rel="prev" title="p02_create_admin_flags" href="Phenotyping.p02_create_admin_flags.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p04_create_creatinine_parameters.html" title="p04_create_creatinine_parameters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p02_create_admin_flags.html" title="p02_create_admin_flags"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p03_add_prev_creatinine_and_egfr_flags</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p03-add-prev-creatinine-and-egfr-flags">
+<h1>p03_add_prev_creatinine_and_egfr_flags<a class="headerlink" href="#p03-add-prev-creatinine-and-egfr-flags" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p03_add_prev_creatinine_and_egfr_flags">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p03_add_prev_creatinine_and_egfr_flags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">race_correction</span><span class="p">:</span> <span class="n">bool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p03_add_prev_creatinine_and_egfr_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function add previousCreatinine Flag as indicator for patient previous creatinine taken and generate patient eGFR parameters.</p>
+<ol class="arabic simple">
+<li><p>Inner join encounter and creatinine file on pid</p></li>
+<li><p>Add PreviousCreatinineFlag by filtering inferred_specimen_datetime is between 365 days and 1 day before admission and esrd_admin_flag != 1. Label rows satisfied the condition as 1 else 0.</p></li>
+<li><p>Calculate patient age and apply eGFR_fun function to calculate eGFR value.</p></li>
+<li><p>Add uncertain_ckd flag column based on the following condition: If finalICD910 = 1 and esrd_admin_flag, kidneyTransplant_admin_flag, and ckd_admin_flag = 0 or If finalICD910 = 0 and PreviousCreatinineFlag = 1, label uncertain_ckd column as 1. Else label as 0.</p></li>
+<li><dl class="simple">
+<dt>Add 3 main areas of creatinine value</dt><dd><ul class="simple">
+<li><p>Locate encounter ids that do not have two eGFR at least 90 days apart as insufficient information and locate encounter ids that finalICD910 = 0. Label those rows for insufficient_data_flag = 1.</p></li>
+<li><p>Locate encounters have two eGFR &lt;= 60, and 90 days apart, not within 30 days before admission. Label those rows for egfr_90d_apart_p30d = 1. Also record egfr_90d_apart_p30d_date as specimen_date, max_specimen_date</p></li>
+<li><p>Locate recent egfr within 30 days before admission, Label those rows for egfr_30d = 1. Also record egfr_30d_date as maximum of specimen_date.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Save final files to intermediate directory in csv format. New columns introduced:</dt><dd><ul class="simple">
+<li><p>PreviousCreatinineFlag: flag column to indicate 1 as previous creatinine present and 0 as not</p></li>
+<li><p>sample_age: patient age using inferred_specimen_datetime - birth_date</p></li>
+<li><p>row_egfr: calculated eGFR value</p></li>
+<li><p>uncertain_ckd: flag column to indicate 1 as uncertain CKD and 0 as not</p></li>
+<li><p>insufficient_data_flag: flag column to indicate 1 as insufficient data (encounter ids that do not have two eGFR at least 90 days apart) and 0 as not</p></li>
+<li><p>egfr_90d_apart_p30d: flag column to indicate 1 as encounters have two eGFR &lt;= 60, and 90 days apart, not within 30 days before admission and 0 as not</p></li>
+<li><p>egfr_90d_apart_p30d_date: specimen_date, max_specimen_date for encounters satisfy the requirement</p></li>
+<li><p>egfr_30d: flag column to indicate 1 as recent egfr within 30 days before admission and 0 as not</p></li>
+<li><p>egfr_30d_date: specimen_date for encounters satisfy the requirement</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> (<em>str</em>) – intermediate file directory</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>race_correction</strong> (<em>bool</em>) – flag for using race agnostic for eGFR calculation, default value = True</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encouter id column name</p></li>
+<li><p><strong>pid</strong> (<em>str</em>) – patient id column name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p02_create_admin_flags.html"
+                        title="previous chapter">p02_create_admin_flags</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p04_create_creatinine_parameters.html"
+                        title="next chapter">p04_create_creatinine_parameters</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p03_add_prev_creatinine_and_egfr_flags.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p04_create_creatinine_parameters.html" title="p04_create_creatinine_parameters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p02_create_admin_flags.html" title="p02_create_admin_flags"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p03_add_prev_creatinine_and_egfr_flags</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

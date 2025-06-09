@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to IDEALIST PRISMAP AKI CKD Phenotyping Pipeline’s documentation! &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="KeGFR_fun" href="api/Phenotyping.KeGFR_fun.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/Phenotyping.KeGFR_fun.html" title="KeGFR_fun"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to IDEALIST PRISMAP AKI CKD Phenotyping Pipeline’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-idealist-prismap-aki-ckd-phenotyping-pipeline-s-documentation">
+<h1>Welcome to IDEALIST PRISMAP AKI CKD Phenotyping Pipeline’s documentation!<a class="headerlink" href="#welcome-to-idealist-prismap-aki-ckd-phenotyping-pipeline-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This documentation contains functions for IDEALIST Phenotyping generation</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="phenotyping-functions-for-phenotyping">
+<h2><a class="reference internal" href="#module-Phenotyping" title="Phenotyping"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Phenotyping</span></code></a>: Functions for Phenotyping<a class="headerlink" href="#phenotyping-functions-for-phenotyping" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.KeGFR_fun.html#Phenotyping.KeGFR_fun" title="Phenotyping.KeGFR_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeGFR_fun</span></code></a>(base_cr, base_eGFR, prev_cr, …)</p></td>
+<td><p>This function returns the KeGFR value for the input parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.eGFR_fun.html#Phenotyping.eGFR_fun" title="Phenotyping.eGFR_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eGFR_fun</span></code></a>(age, sex, race, row_creatinine, …)</p></td>
+<td><p>This Function applies eGFR formula to return eGFR value for different patients based on their age, sex, race, and creatinine value (Lab_result).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.mdrd_fun.html#Phenotyping.mdrd_fun" title="Phenotyping.mdrd_fun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mdrd_fun</span></code></a>(age, sex, race, race_correction)</p></td>
+<td><p>This Function applies MDRD GFR formula to return MDRD GFR value for different patients based on their age, sex, and race.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p00_generate_CKD_AKI.html#Phenotyping.p00_generate_CKD_AKI" title="Phenotyping.p00_generate_CKD_AKI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p00_generate_CKD_AKI</span></code></a>(in_dir, inmd_dir, …)</p></td>
+<td><p>Execute the CKD and AKI phenotyping codes and output the CKD and AKI result for each patient batch by batch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p01_filter_encounter.html#Phenotyping.p01_filter_encounter" title="Phenotyping.p01_filter_encounter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p01_filter_encounter</span></code></a>(encounters, eid, pid)</p></td>
+<td><p>This function keep only encounters with non-missing admit &amp; discharge datetime.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p01_filter_lab.html#Phenotyping.p01_filter_lab" title="Phenotyping.p01_filter_lab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p01_filter_lab</span></code></a>(labs)</p></td>
+<td><p>This function keep labs with 2160-0 LOINC code and non-missing lab result.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p01_load_filter_file.html#Phenotyping.p01_load_filter_file" title="Phenotyping.p01_load_filter_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p01_load_filter_file</span></code></a>(in_dir, inmd_dir, eid, …)</p></td>
+<td><p>This function load and filter encounter, labs, diagnosis, procedure, crrt, and dialysis files and save filtered files to intermediate directory in csv format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p02_create_admin_flags.html#Phenotyping.p02_create_admin_flags" title="Phenotyping.p02_create_admin_flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p02_create_admin_flags</span></code></a>(inmd_dir, eid, pid, batch)</p></td>
+<td><p>This function creates patient history flag, specific history disease flags(aki, ckd, dialysis, kidneyTransplant, esrd) based on the patient history code.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html#Phenotyping.p03_add_prev_creatinine_and_egfr_flags" title="Phenotyping.p03_add_prev_creatinine_and_egfr_flags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p03_add_prev_creatinine_and_egfr_flags</span></code></a>(…)</p></td>
+<td><p>This function add previousCreatinine Flag as indicator for patient previous creatinine taken and generate patient eGFR parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p04_create_creatinine_parameters.html#Phenotyping.p04_create_creatinine_parameters" title="Phenotyping.p04_create_creatinine_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p04_create_creatinine_parameters</span></code></a>(inmd_dir, …)</p></td>
+<td><p>This function creates various creatinine parameters for each unique patient encounter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p05_ckd_class_and_egfr_staging.html#Phenotyping.p05_ckd_class_and_egfr_staging" title="Phenotyping.p05_ckd_class_and_egfr_staging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_ckd_class_and_egfr_staging</span></code></a>(inmd_dir, …)</p></td>
+<td><p>This function is used to determine CKD classes and G-stage of CKD if having CKD.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p05_find_final_class.html#Phenotyping.p05_find_final_class" title="Phenotyping.p05_find_final_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_find_final_class</span></code></a>(row)</p></td>
+<td><p>This function is a subfunction of p05_find_final_class which determines detailed ckd class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p05_find_ref_method.html#Phenotyping.p05_find_ref_method" title="Phenotyping.p05_find_ref_method"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_find_ref_method</span></code></a>(row)</p></td>
+<td><p>This function is to find the method determining reference creatinine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p05_find_subgroup.html#Phenotyping.p05_find_subgroup" title="Phenotyping.p05_find_subgroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_find_subgroup</span></code></a>(ckd_str, aki_flg, …[, …])</p></td>
+<td><p>This function is a subfunction of p05_find_final_class which determines detailed ckd class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p05_get_CKD_class.html#Phenotyping.p05_get_CKD_class" title="Phenotyping.p05_get_CKD_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_get_CKD_class</span></code></a>(detailed_ckd_class)</p></td>
+<td><p>This function is used to generate overall ckd class ([‘0’, ‘1’, ‘ESRD’, ‘Insufficient Data’]).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p05_get_egfr_stage.html#Phenotyping.p05_get_egfr_stage" title="Phenotyping.p05_get_egfr_stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p05_get_egfr_stage</span></code></a>(egfr_value)</p></td>
+<td><p>This function is to determine the G-stage of CKD class ([‘G1’, ‘G2’, ‘G3a’, ‘G3b’, ‘G4’, ‘G5’, ‘No staging can be done!’])</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p06_generate_rrt_summary.html#Phenotyping.p06_generate_rrt_summary" title="Phenotyping.p06_generate_rrt_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p06_generate_rrt_summary</span></code></a>(inmd_dir, eid, pid, …)</p></td>
+<td><p>This function is to find all results related to dialysis including dialysis indicator in one calander day frequency, all time periods under dialysis, all datetime under dialysis recorded in crrt, dialysis, and procedure files, brief dialysis statistic summary. 1. Read all encounters, must contain following columns:     * pid     * eid     * admit_datetime     * dischg_datetime 2. Read and filter crrt file related to dialysis, must contain following columns:     * pid     * eid     * recorded_time     * vital_sign_measure_name     * meas_value 3. Read and filter dialysis file, must contain following columns:     * pid     * eid     * observation_datetime     * hemodialysis_intake     * hemodialysis_output     * peritoneal_dialysis_intake     * peritoneal_dialysis_output 4. Read and filter procedure file related to dialysis, must contain following columns:     * pid     * proc_date     * proc_code    Then map procedure file with encounter file. 5. Combine crrt, dialysis and procedure file a compelte dialysis file with each row containing eid, dialysis time and save the file 6. Generate summary of dialysis statistic including ‘rrt_overall’, ‘rrt_24h’ and save the file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p07_calculate_kegfr.html#Phenotyping.p07_calculate_kegfr" title="Phenotyping.p07_calculate_kegfr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p07_calculate_kegfr</span></code></a>(kegfr_creatinine, …)</p></td>
+<td><p>This function calculates the KeGFR value</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p07_determine_aki.html#Phenotyping.p07_determine_aki" title="Phenotyping.p07_determine_aki"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p07_determine_aki</span></code></a>(creatinine)</p></td>
+<td><p>The function is used to determine if patient has aki if one of following conditions is satified:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p07_find_minimum_creatinine_within_past_days.html#Phenotyping.p07_find_minimum_creatinine_within_past_days" title="Phenotyping.p07_find_minimum_creatinine_within_past_days"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p07_find_minimum_creatinine_within_past_days</span></code></a>(…)</p></td>
+<td><p>This function is used to find the minimum creatinine within past predefined days.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p07_generate_aki.html#Phenotyping.p07_generate_aki" title="Phenotyping.p07_generate_aki"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p07_generate_aki</span></code></a>(inmd_dir, race_correction, …)</p></td>
+<td><p>This function is used to generate aki flag and generate summary of aki related statistic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p07_get_aki_stage.html#Phenotyping.p07_get_aki_stage" title="Phenotyping.p07_get_aki_stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p07_get_aki_stage</span></code></a>(row)</p></td>
+<td><p>This function is used to group AKI stage including ‘Stage 3 + RRT’, ‘Stage 3’, ‘Stage 2’ and ‘Stage 1’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p08_cal_mortality.html#Phenotyping.p08_cal_mortality" title="Phenotyping.p08_cal_mortality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p08_cal_mortality</span></code></a>(encounter, pid)</p></td>
+<td><p>This function is used to calculate mortality including 30 day, 90 day, 6 month, 1 year, 2 year and 3 year.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p08_generateTrajectory.html#Phenotyping.p08_generateTrajectory" title="Phenotyping.p08_generateTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p08_generateTrajectory</span></code></a>(inmd_dir, in_dir, …)</p></td>
+<td><p>This function is used to generate AKI trajectory groups including ‘pAKI with recovery’ (persistent AKI with renal recovery), ‘pAKI without recovery’ (persistent AKI without renal recovery), ‘non-pAKI with recovery’ (rapidly reversed AKI), and ‘No AKI’.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/Phenotyping.p08_get_dischg_position.html#Phenotyping.p08_get_dischg_position" title="Phenotyping.p08_get_dischg_position"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p08_get_dischg_position</span></code></a>(encounter)</p></td>
+<td><p>This function is used to category discharge disposition into three classes including ‘Dead’ (hospital dead), ‘Home/Rehab’ and ‘ANOTHER HOSPITAL/LTAC/SNF/HOSPICE’.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/Phenotyping.p09_merge_outputfile.html#Phenotyping.p09_merge_outputfile" title="Phenotyping.p09_merge_outputfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p09_merge_outputfile</span></code></a>(inmd_dir, out_dir, eid, …)</p></td>
+<td><p>This function is used to merge all files stored in batch and output a single csv file to the destination folder.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-Phenotyping"></span></div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to IDEALIST PRISMAP AKI CKD Phenotyping Pipeline’s documentation!</a><ul>
+<li><a class="reference internal" href="#phenotyping-functions-for-phenotyping"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Phenotyping</span></code>: Functions for Phenotyping</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api/Phenotyping.KeGFR_fun.html"
+                        title="next chapter">KeGFR_fun</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="api/Phenotyping.KeGFR_fun.html" title="KeGFR_fun"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to IDEALIST PRISMAP AKI CKD Phenotyping Pipeline’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

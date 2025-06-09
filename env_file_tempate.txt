@@ -1,0 +1,15 @@
+XXXAPARIXXXroot_project_dir=
+XXXAPARIXXXdatabase_host_name=
+XXXAPARIXXXdatabase=
+XXXAPARIXXXdatabase_username=
+XXXAPARIXXXdatabase_password=
+XXXAPARIXXXvocab_schema=
+XXXAPARIXXXdata_schema=
+XXXAPARIXXXlookup_schema=
+XXXAPARIXXXresults_schema=
+XXXAPARIXXXoperational_schema=
+XXXAPARIXXXn_gpus=
+XXXAPARIXXXmax_workers=
+XXXAPARIXXXdefault_facility_zip=
+XXXAPARIXXXmode=data_retrieval
+XXXAPARIXXXdisplay_logs=FALSE

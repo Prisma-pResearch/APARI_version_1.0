@@ -1,0 +1,30 @@
+---
+sidebar_position: 1
+description: OMOP Database Configuration for APARI Project
+---
+
+Proper database configuration and population is critical to fetch the data for the APARI project. 
+
+## Database Configuration
+* SQL Version: Microsoft SQL SERVER 2012 or later
+* OMOP Common Data Model: v5.4
+
+## Required Data Elements
+
+import Excel from '@site/src/components/files-excel/excel'
+import datas from '@site/static/meta_APARI.json'
+import Image from '@theme/IdealImage';
+export const ExcelShow = () => (
+   <div>
+      <Excel datas={datas} />
+    </div>
+);
+
+We recommend running a data quality assessment on your database with [*DataQualityDashboard*](https://ohdsi.github.io/DataQualityDashboard/) tool. The results of the  DQD assement on our surgical cohort are as follows.
+
+<Image img = {require('./apari_dqd_results.png')}/>
+
+[**Download Variables Dictionary**](./apari_OMOP_table_column_info.xlsx)
+
+<ExcelShow/>
+

@@ -1,0 +1,49 @@
+---
+sidebar_position: 1
+description: Federated learning introduction
+---
+
+## Federated Learning
+
+Federated learning is a machine learning approach that enables multiple parties to collaboratively train a model without sharing their sensitive data with each other. In the context of medical cases, this approach has become increasingly important as healthcare providers are increasingly aware of the importance of protecting patient privacy while still being able to benefit from the insights provided by machine learning models.
+
+To implement the Federated learning application, we also investigated various Federated learning platforms and selected NVIDIA Flare.
+
+[Nvidia Flare](https://developer.nvidia.com/flare) is a commercial FL platform developed by Nvidia. It is designed to work with [Nvidia Clara](https://developer.nvidia.com/industries/healthcare#:~:text=What%20is%20NVIDIA%20Clara%3F,delivery%20and%20accelerate%20drug%20discovery.), a popular healthcare-focused machine learning platform. The platform provides a set of APIs for building and deploying federated learning models. It supports a wide range of machine learning tasks, including image classification, natural language processing, and deep learning. Nvidia Flare also provides tools for privacy-preserving machine learning, such as homomorphic encryption. The development team is still activly updating the project to include more features and practical examples.
+
+
+## Installation of NVFlare
+
+:::note
+
+This simple tutorial is generated refer to [NVIDIA Flare official documents](https://nvflare.readthedocs.io/en/stable/),
+the examples and codes are made and tested with the version `v2.2`
+
+:::
+
+- Create virtual environment
+NVFlare is a python package and requires `Python 3.8`. We highly recommand you to create a virtual environment beforing installation. 
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="Anaconda" label="Anaconda" default>
+
+    conda create -n nvflare python=3.8
+    conda activate nvflare
+
+  </TabItem>
+  <TabItem value="Python" label="Python">
+
+    python3 -m venv nvflare
+    source nvflare/bin/activate
+
+  </TabItem>
+</Tabs>
+
+- Install NVFlare
+```bash
+python -m pip install nvflare
+```
+If you want to get more details about installation or containerization, please refer to [NVFlare official documents](https://nvflare.readthedocs.io/en/stable/)

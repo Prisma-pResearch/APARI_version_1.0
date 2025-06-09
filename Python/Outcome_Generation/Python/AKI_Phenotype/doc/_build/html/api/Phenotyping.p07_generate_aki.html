@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p07_generate_aki &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p07_get_aki_stage" href="Phenotyping.p07_get_aki_stage.html" />
+    <link rel="prev" title="p07_find_minimum_creatinine_within_past_days" href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_get_aki_stage.html" title="p07_get_aki_stage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" title="p07_find_minimum_creatinine_within_past_days"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_generate_aki</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p07-generate-aki">
+<h1>p07_generate_aki<a class="headerlink" href="#p07-generate-aki" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p07_generate_aki">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p07_generate_aki</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">race_correction</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p07_generate_aki" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to generate aki flag and generate summary of aki related statistic.</p>
+<ol class="arabic simple">
+<li><p>Preprocessing creatinine dataframe by dropping duplicates, removing creatinine with missing eid.</p></li>
+<li><p>Find minimum creatinine wihin past 48 hours / 7 days by applying p07_find_minimum_creatinine_within_past_days function.</p></li>
+</ol>
+<p>3. We only determine aki using creatinine taken from admission day to discharge datetime.
+3. Find recent dialysis time, check if within 7 days
+4. Check if creatinine &gt;= 4
+5. Find base reference creatinine, if reference creatinine calcualted in egfr staging exists, use it;</p>
+<blockquote>
+<div><p>otherwise use minimum of ([first creatine, mdrd (if have ckd)]) as reference creatinine</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Determine aki by applying p07_determine_aki function</p></li>
+<li><p>Calculate kiGFR by applying p07_calculate_kegfr function</p></li>
+<li><dl class="simple">
+<dt>Generate daily AKI within entire hospital admission</dt><dd><ul class="simple">
+<li><p>generate all calander days from admission to discharge</p></li>
+<li><p>correct aki flag if that day has rrt, and also change worst AKI stage of that day as ‘Stage 3 + RRT’</p></li>
+<li><p>carry forward aki flag and worst aki stage for missing ones, if still missing, regard as no aki</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>9. Determine AKI episodes, if there are more than 2 continus days with no aki, the next first aki day is the start of new aki episodes.
+10.Find the worst aki stage within en episode, and calculate the days of each episode.
+11.Generate aki summary file and save.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> – intermediate directory location</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>race_correction</strong> (<em>bool</em>) – race correction indicator</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encounter id column name</p></li>
+<li><p><strong>pid</strong> (<em>str</em>) – patient id column name, default value = ‘patient_deiden_id’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>INSERT FLOWCHART</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html"
+                        title="previous chapter">p07_find_minimum_creatinine_within_past_days</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p07_get_aki_stage.html"
+                        title="next chapter">p07_get_aki_stage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p07_generate_aki.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_get_aki_stage.html" title="p07_get_aki_stage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p07_find_minimum_creatinine_within_past_days.html" title="p07_find_minimum_creatinine_within_past_days"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p07_generate_aki</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

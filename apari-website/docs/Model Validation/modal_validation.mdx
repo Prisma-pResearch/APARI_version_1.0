@@ -1,0 +1,105 @@
+# Model Architecture validation
+
+During this stage, each site will be provided the APARI model architecture. 
+Each site will run the below scripts to train,test, and validate the model on their own data.
+
+## Build Docker image
+Docker is a platform designed to help developers build, share, and run modern applications. We provided a `Dockerfile` to build the docker image.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="NVIDIA" label="NVIDIA GPUs" default>
+
+1. Check the NVIDIA Drivers with command `nvidia-smi` and find the CUDA version.
+2. Install [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker), skip to the next step if you have already installed it. :
+
+
+```bash
+## add the package repositories
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+&& curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+&& curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+## update package repositories
+sudo apt-get update
+apt-get install -y nvidia-docker2
+
+## restart Docker
+sudo systemctl restart docker
+```
+
+3. Build the docker image and run the instance
+* Refer to your OS and CUDA versions, please find the proper base image from [NVIDIA/CUDA](https://hub.docker.com/r/nvidia/cuda/tags)
+* Modify the `Dockerfile` with the proper base image.:
+
+[<strong>Download dockerfile and environment.yaml </strong>](https://github.com/Prisma-pResearch/APARI_Federated_Learning/tree/main/apari-website/static)
+
+:::info Notice
+Pleace place the `dockerfile` and `environment.yaml` in the same place.<br/>
+The docker image needs a Github Token to download the model from the private repository. Please generate a Github Token based on the tutorial [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+:::
+
+
+```bash
+cd /path/to/dockerfile 
+
+## generate the docker image
+docker build --build-arg="GITHUB_TOKEN=${GITHUB_TOKEN}" -tag=apari-local .
+
+## test the instance
+docker run --gpus all -it --name test_apari --rm -v /path/to/store/results/on/hostmachine:/Workspace apari-local
+
+```
+   
+</TabItem>
+<TabItem value="CPU" label="CPU">
+
+* Pull the base image with command `docker pull XXXimageXXX` refer to your OS.
+* Build the image with command below:
+
+[<strong>Download dockerfile and environment.yaml </strong>](https://github.com/Prisma-pResearch/APARI_Federated_Learning/tree/main/apari-website/static)
+
+:::info Notice
+Pleace place the `dockerfile` and `environment.yaml` in the same place.<br/>
+The docker image needs a Github Token to download the model from the private repository. Please generate a Github Token based on the tutorial [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+<strong> Please modify the dockerfile before running the below commands </strong>
+
+:::
+
+
+```bash
+cd /path/to/dockerfile 
+
+## generate the docker image
+docker build --build-arg="GITHUB_TOKEN=${GITHUB_TOKEN}" -tag=apari-local .
+## test the instance
+docker run -it --name test_apari --rm -v /path/to/store/results/on/hostmachine:/Workspace apari-local
+
+```
+
+
+</TabItem>
+</Tabs>
+
+
+## Run docker Container
+
+1. Prepare the environmental variables, the template file is located at[here](https://github.com/Prisma-pResearch/APARI_Federated_Learning/blob/main/env_file_tempate.txt)
+
+- Please download the template file and place it at the workspace in host machine. 
+- Fill the `env_file_tempate.txt` with the proper information and save the updated file to `.env` 
+
+2. Run the docker container with the command below:
+
+```bash
+
+## start the docker container, please rmeove --gpus all if you are not using GPUs
+docker run -it --name run_APARI --gpus all -v /path/to/store/results/on/hostmachine:/Workspace --env-file .env -d apari-local
+
+## run codes
+
+docker exec -it run_APARI python3 /Workspace/APARI_Federated_Learning/main.py -e True
+
+```

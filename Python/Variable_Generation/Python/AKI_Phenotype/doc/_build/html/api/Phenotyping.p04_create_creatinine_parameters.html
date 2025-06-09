@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p04_create_creatinine_parameters &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p05_ckd_class_and_egfr_staging" href="Phenotyping.p05_ckd_class_and_egfr_staging.html" />
+    <link rel="prev" title="p03_add_prev_creatinine_and_egfr_flags" href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_ckd_class_and_egfr_staging.html" title="p05_ckd_class_and_egfr_staging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" title="p03_add_prev_creatinine_and_egfr_flags"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p04_create_creatinine_parameters</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p04-create-creatinine-parameters">
+<h1>p04_create_creatinine_parameters<a class="headerlink" href="#p04-create-creatinine-parameters" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p04_create_creatinine_parameters">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p04_create_creatinine_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p04_create_creatinine_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function creates various creatinine parameters for each unique patient encounter.</p>
+<ol class="arabic simple">
+<li><p>Load encounter and creatinine files in the intermediate directory as dataframe</p></li>
+<li><p>For creatinine dataframe, clean columns to correct data types and keep rows with only lab_result &lt;= 30</p></li>
+<li><dl class="simple">
+<dt>Use the cleaned creatinine dataframe to create the following dataframes</dt><dd><ul class="simple">
+<li><p>admission_cr: keep rows where specimen_date = admit_date, this represents all the creatinine value collected on patient admission date</p></li>
+<li><p>previous_7_cr: keep rows where admit_date - specimen_date &lt;= 7, this represents all the creatinine value collected 7 days prior to patient admission date</p></li>
+<li><p>previous_8_365_cr: keep rows where 7 &lt; admit_date - specimen_date &lt;= 365, this represents all the creatinine value collected 8 days to 1 year prior to patient admission date</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Aggregate lab_result column for admission_cr, previous_7_cr and previous_8_365_cr</dt><dd><ul class="simple">
+<li><p>For admission_cr, previous_7_cr, take the minimum creatinine value as lab_result for each distinct encounter id rename as admission_creatinine, min_7_days and record corresponding dates</p></li>
+<li><p>For previous_8_365_cr, take the median creatinine value as lab_result for each distinct encounter id rename as medium_8_365_days. Using ‘gap’ column by taking the absolute difference between orignal lab_result and median creatinine value and record the date with the least gap.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Left join encounter dataframe with 3 updated creatinine dataframes sequentially on encounter id.</p></li>
+<li><dl class="simple">
+<dt>Save the updated encounter dataframe to intermediate directory as csv file. New columns added:</dt><dd><ul class="simple">
+<li><p>admission_creatinine</p></li>
+<li><p>min_7_days</p></li>
+<li><p>min_7_days_date</p></li>
+<li><p>medium_8_365_days</p></li>
+<li><p>medium_8_365_days_date</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> (<em>str</em>) – intermediate file directory</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encouter id column name, default value = ‘merged_enc_id’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html"
+                        title="previous chapter">p03_add_prev_creatinine_and_egfr_flags</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_ckd_class_and_egfr_staging.html"
+                        title="next chapter">p05_ckd_class_and_egfr_staging</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p04_create_creatinine_parameters.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_ckd_class_and_egfr_staging.html" title="p05_ckd_class_and_egfr_staging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" title="p03_add_prev_creatinine_and_egfr_flags"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p04_create_creatinine_parameters</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

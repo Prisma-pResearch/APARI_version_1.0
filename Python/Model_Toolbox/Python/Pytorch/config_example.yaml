@@ -1,0 +1,154 @@
+dataset:
+  h5_file:
+    '/data/MSR_MR/Data/intermediate_data/dataset/dataset_v1.3_k_fold_train_test.h5'
+  batch_dset_map:
+    preoperative_static_continuous:
+      h5_ds_key:
+        'preoperative_static_continuous'
+      dtype:
+        'torch.FloatTensor'
+    preoperative_static_continuous_indicators:
+       h5_ds_key:
+         'preoperative_static_continuous_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    preoperative_static_binary:
+      h5_ds_key:
+        'preoperative_static_binary'
+      dtype:
+        'torch.FloatTensor'
+    preoperative_static_binary_indicators:
+       h5_ds_key:
+         'preoperative_static_binary_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    preoperative_static_embedding:
+      h5_ds_key:
+        'preoperative_static_embedding'
+      dtype:
+        'torch.LongTensor'
+    intraop_time_series_continuous:
+      h5_ds_key:
+        'time_series_continuous'
+      dtype:
+        'torch.FloatTensor'
+    intraop_time_series_continuous_indicators:
+       h5_ds_key:
+         'time_series_continuous_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    intraop_static_continuous:
+      h5_ds_key:
+        'flattened_time_series_io_only_continuous'
+      dtype:
+        'torch.FloatTensor'
+    intraop_static_continuous_indicators:
+      h5_ds_key:
+        'flattened_time_series_io_only_continuous_missing_ind'
+      dtype:
+        'torch.FloatTensor'
+    y:
+      h5_ds_key:
+        'y'
+      dtype:
+        'torch.FloatTensor'
+  filter_columns:
+    ['postop_loc', 'count_hgb_0_7', 'wghtloss', 'count_serum_lactate_0_7', 'admission_source', 'count_serum_alanine_0_7', 'udn_missing_ind', 'bmi_missing_ind', 'ichf', 'nsaids', 'cci',
+     'rbc_mch_max_8_365_missing_ind', 'ipvd', 'antiemetics', 'count_serum_inr_0_7', 'beta_blockers', 'udn', 'sched_trauma_room', 'serum_ca_mean_0_7', 'night_admission', 'distance_to_facility',
+     'anesthesia_type', 'rbc_min_0_7', 'count_serum_esr_0_7', 'depress', 'icpd', 'icvd', 'bun_mean_0_7', 'valve', 'egfr_missing_ind', 'serum_glucose_max_0_7', 'hgb_max_0_7', 'serum_ca_min_0_7',
+     'icancer', 'count_rbcurn_0_365', 'num_meds_missing_ind', 'emergent', 'count_serum_inr_8_365', 'count_gluurnn_0_7', 'hgb_var_0_7', 'obese', 'diuretics', 'aspirin', 'aceis_arbs',
+     'bicarbonates', 'coag', 'lytes', 'count_serum_alanine_8_365', 'median_income', 'imcancer', 'serum_glucose_min_0_7', 'count_serum_anion_gap_0_7', 'count_mpv_8_365', 'count_wbc_0_7',
+     'hgb_var_8_365', 'serum_creatinine_max_0_7', 'count_serum_anion_gap_8_365', 'nephrotoxic', 'rbc_mch_min_0_7', 'rbc_mch_max_0_7', 'hypothy', 'htn_c', 'prop_hisp_missing_ind',
+     'serum_ph_present_0_7', 'bp_systolic', 'bp_diastolic', 'bp_map', 'heart_rate', 'age_adjusted_mac', 'spo2', 'pip', 'etco2', 'tidal_volume', 'respiratory_rate',
+     'clean_core_body_temp_celsius', 'bp_systolic_missing_ind', 'bp_diastolic_missing_ind', 'bp_map_missing_ind', 'heart_rate_missing_ind', 'age_adjusted_mac_missing_ind',
+      'spo2_missing_ind', 'pip_missing_ind', 'etco2_missing_ind', 'tidal_volume_missing_ind', 'fio2_missing_ind', 'o2_l_min_missing_ind', 'respiratory_rate_missing_ind', 
+      'peep_missing_ind', 'clean_core_body_temp_celsius_missing_ind', 'estimated_blood_loss_ml', 'urine_output', 'estimated_blood_loss_ml_missing_ind', 'urine_output_missing_ind']
+  target_outcome_index:
+    NULL
+  interpretable_keys:
+    ['preoperative_static_continuous', 'preoperative_static_continuous_indicators',
+     'preoperative_static_binary', 'preoperative_static_binary_indicators',
+      'intraop_time_series_continuous', 'intraop_time_series_continuous_indicators',
+      'intraop_static_continuous', 'intraop_static_continuous_indicators']
+  h5_N_key:
+     'preoperative_static_binary'
+  cat_embedding_key:
+    preoperative_static_embedding:
+      'preoperative_static_pre_embeded'
+  variable_length_seq_keys:
+    ['intraop_time_series_continuous', 'intraop_time_series_continuous_indicators']
+  start_key:
+    'ts_start_idx'
+  seq_len_key:
+    'ts_seqlens'
+  precache_data:
+    true
+  k_folds:
+    5
+  other_dsets_to_cache:
+    ['flattened_time_series_continuous', 'flattened_time_series_continuous_missing_ind']
+model:
+  # Learning Configuration
+  optimizer:
+    'adam'
+  lr:
+    '1e-3'
+  dropout:
+    0.2
+  weight_decay:
+    '1e-4'
+  # Training Configuration
+  batch_size:
+    64
+  patience:
+    3
+  monitor:
+    'val_auroc_mean'
+  mode:
+    'max'
+  save_dir:
+    '/data/MSR_MR/Results/models/Deep_models'
+  # Resource Usage Settings
+  gpus:
+    1  # Number of GPUs to use
+  n:
+    NULL  # To quickly debug, set n to an integer # of samples for quickly making sure everything works
+  num_workers:
+    16
+  # Model Structure Settings
+  mutually_exclusive:
+    false
+  continuous_pred:
+    false
+  which:
+    'static_and_time_series'
+  hidden_dim:
+    64
+  activation:
+    'torch.nn.ReLU'
+  seq_time_series_label:
+    'intraop_time_series_seq'
+  static_time_series_label:
+    'intraop_time_series_static'
+  static_label:
+    'preop_static'
+  n_intraop_time_series_seq_layers:
+    1
+  key_preop_static_continuous:
+    'preoperative_static_continuous'
+  key_preop_static_continuous_indicator:
+    'preoperative_static_continuous_indicators'
+  key_preop_static_binary:
+    'preoperative_static_binary'
+  key_preop_static_binary_indicator:
+    'preoperative_static_binary_indicators'
+  key_preop_static_embedding:
+    'preoperative_static_embedding'
+  key_intraop_time_series_seq_continuous:
+    'intraop_time_series_continuous'
+  key_intraop_time_series_seq_continuous_indicator:
+    'intraop_time_series_continuous_indicators'
+  key_intraop_time_series_static_continuous:
+    'intraop_static_continuous'
+  key_intraop_time_series_static_continuous_indicator:
+    'intraop_static_continuous_indicators'

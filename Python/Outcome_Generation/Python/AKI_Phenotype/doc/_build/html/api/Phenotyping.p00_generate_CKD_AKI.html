@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p00_generate_CKD_AKI &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p01_filter_encounter" href="Phenotyping.p01_filter_encounter.html" />
+    <link rel="prev" title="mdrd_fun" href="Phenotyping.mdrd_fun.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_filter_encounter.html" title="p01_filter_encounter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.mdrd_fun.html" title="mdrd_fun"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p00_generate_CKD_AKI</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p00-generate-ckd-aki">
+<h1>p00_generate_CKD_AKI<a class="headerlink" href="#p00-generate-ckd-aki" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p00_generate_CKD_AKI">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p00_generate_CKD_AKI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">out_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">race_correction</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">out_begin</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">enc_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">labs_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">diagnosis_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">procedure_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">crrt_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">dialysis_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">ssdi_name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p00_generate_CKD_AKI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the CKD and AKI phenotyping codes and output the CKD and AKI result for each patient batch by batch.</p>
+<ol class="arabic simple">
+<li><p>Creates success file path for each step if not exists</p></li>
+<li><p>Execute code step by step</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_dir</strong> (<em>str</em>) – Source data directory.</p></li>
+<li><p><strong>inmd_dir</strong> (<em>str</em>) – Intermediate data directory.</p></li>
+<li><p><strong>out_dir</strong> (<em>str</em>) – Output files directory.</p></li>
+<li><p><strong>race_correction</strong> (<em>bool</em>) – Indicator for applying race correction functions.</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – Encounter deidentified id.</p></li>
+<li><p><strong>pid</strong> (<em>str</em>) – Patient deidentified id.</p></li>
+<li><p><strong>out_begin</strong> (<em>str</em>) – Output file begin name.</p></li>
+<li><p><strong>enc_name</strong> (<em>str</em>) – Encounter file name.</p></li>
+<li><p><strong>labs_name</strong> (<em>str</em>) – Labs file name.</p></li>
+<li><p><strong>diagnosis_name</strong> (<em>str</em>) – Diagnosis file name.</p></li>
+<li><p><strong>procedure_name</strong> (<em>str</em>) – Procedure file name.</p></li>
+<li><p><strong>crrt_name</strong> (<em>str</em>) – CRRT file name.</p></li>
+<li><p><strong>dialysis_name</strong> (<em>str</em>) – Dialysis file name.</p></li>
+<li><p><strong>ssdi_name</strong> (<em>str</em>) – Social security death index file name.</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – Input batch number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<dl>
+<dt>Flow chart for this function:</dt><dd><img alt="../_images/generate_CKD_AKI_fun.png" src="../_images/generate_CKD_AKI_fun.png" />
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.mdrd_fun.html"
+                        title="previous chapter">mdrd_fun</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p01_filter_encounter.html"
+                        title="next chapter">p01_filter_encounter</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p00_generate_CKD_AKI.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_filter_encounter.html" title="p01_filter_encounter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.mdrd_fun.html" title="mdrd_fun"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p00_generate_CKD_AKI</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

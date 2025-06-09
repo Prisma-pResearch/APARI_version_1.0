@@ -1,0 +1,57 @@
+db:
+  cassandra:
+    cassandraHost: XXXXXX
+    cassandraPassword: XXXXXX
+    cassandraPort: XXXXXX
+    cassandraUserName: XXXXXX
+  mysql:
+    driver: mysql+pymysql
+    host: XXXXXX
+    pass: XXXXXX
+    user: XXXXXX
+  sql_server_dev:
+    driver: ODBC Driver 17 for SQL Server
+    host: XXXXXX
+    pass: XXXXXX
+    user: XXXXXX
+  sql_server_prod:
+    driver: ODBC Driver 17 for SQL Server
+    host: XXXXXX
+email: XXXXXX
+file_paths:
+  msr_prod:
+    local:
+      cred_fp: XXXXXX
+      data: XXXXXX
+      home: XXXXXX
+      key_fp: XXXXXX
+    docker:
+      acuity: XXXXXX
+      idealist: XXXXXX
+      thesis: XXXXXX
+    share_drive:
+      idealist: /XXXXXX
+      idealist_data: XXXXXX
+  windows:
+    local:
+      cache: XXXXXX
+      cred_fp: XXXXXX
+      key_fp: XXXXXX
+    share_drive:
+      idealist: XXXXXX
+      idealist_data: XXXXXX
+      idealist_idr: XXXXXX
+      share: XXXXXX
+      u: XXXXXX
+key_fp: XXXXXX
+servers:
+  msr: XXXXXX
+  msr_data: XXXXXX
+  msr_prod: XXXXXX
+system_email:
+  systemEmailPassword: XXXXXX
+  systemEmailSSLConfig: false
+  systemEmailSender: XXXXXX
+  systemEmailSmtpPort: XXXXXX
+  systemEmailSmtpServer: XXXXXX
+  systemEmailUsername: XXXXXX

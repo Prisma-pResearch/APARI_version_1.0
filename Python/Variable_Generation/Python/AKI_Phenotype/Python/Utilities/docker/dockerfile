@@ -1,0 +1,62 @@
+FROM rapidsai/rapidsai:cuda11.4-runtime-ubuntu20.04-py3.10
+
+# Install OS packages
+RUN apt-get update && apt-get -y update
+# RUN apt-get install -y python3-pip
+# RUN apt-get install -y curl
+RUN apt-get -y install vim
+RUN apt-get -y install unixodbc-dev
+RUN apt-get -y install acl
+RUN apt-get install -y build-essential
+RUN apt-get -y install freetds-bin
+
+# install python packages
+COPY /requirements.txt .
+RUN /opt/conda/envs/rapids/bin/pip install -r requirements.txt
+
+
+# install sql server drivers
+RUN apt-get install -y gnupg2
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+# Ubuntu 18.04
+# RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+# Ubuntu 20.04
+RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+# Ubuntu 21.04
+# curl https://packages.microsoft.com/config/ubuntu/21.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get update
+RUN ACCEPT_EULA=Y apt-get install -y --allow-unauthenticated msodbcsql17
+RUN ACCEPT_EULA=Y apt-get install -y --allow-unauthenticated mssql-tools
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+
+# COPY Codes Over
+COPY /Database/ /IC3/Utilities/Database/
+COPY /Encryption/ /IC3/Utilities/Encryption/
+COPY /FileHandling/ /IC3/Utilities/FileHandling/
+COPY /General/ /IC3/Utilities/General/
+COPY /Logging/ /IC3/Utilities/Logging/
+COPY /PreProcessing/ /IC3/Utilities/PreProcessing/
+COPY /ProjectManagement/ /IC3/Utilities/ProjectManagement/
+COPY /Reporting/ /IC3/Utilities/Reporting/
+COPY /ResourceManagement/ /IC3/Utilities/ResourceManagement/
+COPY /Resource_Files/ /IC3/Utilities/Resource_Files/
+COPY /README.md /IC3/Utilities/
+
+
+# EXPOSE Ports
+# "shell_port": 
+EXPOSE 33757
+# "iopub_port": 
+EXPOSE 36797
+# "stdin_port": 
+EXPOSE 46129
+# "control_port": 
+EXPOSE 39655
+# "hb_port": 
+EXPOSE 57183
+# jupyter Ports
+EXPOSE 8888
+EXPOSE 8889
+EXPOSE 8787
+EXPOSE 8786

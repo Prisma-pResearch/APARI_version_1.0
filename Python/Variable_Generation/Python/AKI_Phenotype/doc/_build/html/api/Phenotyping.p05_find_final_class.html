@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p05_find_final_class &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p05_find_ref_method" href="Phenotyping.p05_find_ref_method.html" />
+    <link rel="prev" title="p05_ckd_class_and_egfr_staging" href="Phenotyping.p05_ckd_class_and_egfr_staging.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_ref_method.html" title="p05_find_ref_method"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_ckd_class_and_egfr_staging.html" title="p05_ckd_class_and_egfr_staging"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_find_final_class</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p05-find-final-class">
+<h1>p05_find_final_class<a class="headerlink" href="#p05-find-final-class" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p05_find_final_class">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p05_find_final_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">row</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p05_find_final_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a subfunction of p05_find_final_class which determines detailed ckd class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>Series</em>) – <dl class="simple">
+<dt>A row of dataframe, must contain following rows:</dt><dd><ul class="simple">
+<li><p>finalicd910</p></li>
+<li><p>esrd_admin_flag</p></li>
+<li><p>kidneytransplant_admin_flag</p></li>
+<li><p>aki_admin_flag</p></li>
+<li><p>ckd_admin_flag</p></li>
+<li><p>kidney_date</p></li>
+<li><p>esrd_date</p></li>
+<li><p>admission_creatinine</p></li>
+<li><p>mdrd</p></li>
+<li><p>insufficient_data_flag</p></li>
+<li><p>egfr_90d_apart_p30d</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>detailed ckd class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>MAY NEED FLOWCHART</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_ckd_class_and_egfr_staging.html"
+                        title="previous chapter">p05_ckd_class_and_egfr_staging</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_find_ref_method.html"
+                        title="next chapter">p05_find_ref_method</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p05_find_final_class.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_ref_method.html" title="p05_find_ref_method"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_ckd_class_and_egfr_staging.html" title="p05_ckd_class_and_egfr_staging"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_find_final_class</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

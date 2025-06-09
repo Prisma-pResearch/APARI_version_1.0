@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p01_filter_lab &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p01_load_filter_file" href="Phenotyping.p01_load_filter_file.html" />
+    <link rel="prev" title="p01_filter_encounter" href="Phenotyping.p01_filter_encounter.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_load_filter_file.html" title="p01_load_filter_file"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_filter_encounter.html" title="p01_filter_encounter"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p01_filter_lab</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p01-filter-lab">
+<h1>p01_filter_lab<a class="headerlink" href="#p01-filter-lab" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p01_filter_lab">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p01_filter_lab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">labs</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#Phenotyping.p01_filter_lab" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function keep labs with 2160-0 LOINC code and non-missing lab result.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Locate specific lab_id and update stamped_and_inferred_loinc_code accordingly.</dt><dd><ul class="simple">
+<li><p>for lab_id: ‘969’, ‘1526296’, ‘1510379’, ‘3412’, ‘3156’, update stamped_and_inferred_loinc_code to ‘2160-0’.</p></li>
+<li><p>for lab_id: ‘3028’, update stamped_and_inferred_loinc_code to ‘38483-4’.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Filter all the labs that has stamped_and_inferred_loinc_code as ‘2160-0’.</p></li>
+<li><p>Clean ‘lab_result’ and ‘lab_unit’ columns. Remove rows that does not have value in ‘lab_result’.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labs</strong> (<em>pandas.DataFrame</em>) – <dl class="simple">
+<dt>Labs dataframe, must contains the following columns:</dt><dd><ul class="simple">
+<li><p>lab_id</p></li>
+<li><p>stamped_and_inferred_loinc_code</p></li>
+<li><p>lab_result</p></li>
+<li><p>lab_unit</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>filtered lab dataframe</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p01_filter_encounter.html"
+                        title="previous chapter">p01_filter_encounter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p01_load_filter_file.html"
+                        title="next chapter">p01_load_filter_file</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p01_filter_lab.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_load_filter_file.html" title="p01_load_filter_file"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_filter_encounter.html" title="p01_filter_encounter"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p01_filter_lab</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

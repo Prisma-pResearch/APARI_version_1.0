@@ -1,0 +1,16 @@
+
+[submodule "Python/Utilities"]
+	path = Python/Utilities
+	url = https://github.com/Prisma-pResearch/Utilities
+[submodule "Python/Variable_Generation"]
+	path = Python/Variable_Generation
+	url = https://github.com/Prisma-pResearch/Variable_Generation
+[submodule "Python/SOFA"]
+	path = Python/SOFA
+	url = https://github.com/Prisma-pResearch/SOFA
+[submodule "Python/Outcome_Generation"]
+	path = Python/Outcome_Generation
+	url = https://github.com/Prisma-pResearch/Outcome_Generation
+[submodule "Python/Model_Toolbox"]
+	path = Python/Model_Toolbox
+	url = https://github.com/Prisma-pResearch/Model_Toolbox

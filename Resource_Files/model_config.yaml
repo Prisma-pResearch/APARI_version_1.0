@@ -1,0 +1,137 @@
+dataset:
+  h5_file:
+    'required'
+  batch_dset_map:
+    static_numeric:
+      h5_ds_key:
+        'static_numeric'
+      dtype:
+        'torch.FloatTensor'
+    static_numeric_indicators:
+       h5_ds_key:
+         'static_numeric_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    static_binary:
+      h5_ds_key:
+        'static_binary'
+      dtype:
+        'torch.FloatTensor'
+    static_binary_indicators:
+       h5_ds_key:
+         'static_binary_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    static_cat_embedding:
+      h5_ds_key:
+        'static_cat_embedding'
+      dtype:
+        'torch.LongTensor'
+    time_series_numeric:
+      h5_ds_key:
+        'time_series_numeric'
+      dtype:
+        'torch.FloatTensor'
+    time_series_numeric_indicators:
+       h5_ds_key:
+         'time_series_numeric_missing_ind'
+       dtype:
+         'torch.FloatTensor'
+    y:
+      h5_ds_key:
+        'y'
+      dtype:
+        'torch.FloatTensor'
+  filter_columns:
+    NULL
+  target_outcome_index:
+    ['prolonged_icu_stay']  # ['hospital_mortality', 'prolonged_icu_stay']
+  interpretable_keys:
+    ['static_numeric', 'static_numeric_indicators',
+     'static_binary', 'static_binary_indicators',
+      'time_series_numeric', 'time_series_numeric_indicators',
+      'intraop_static_continuous', 'intraop_static_continuous_indicators']
+  h5_N_key:
+     'static_binary'
+  cat_embedding_key:
+    static_cat_embedding:
+      'static_cat_embedding'
+  variable_length_seq_keys:
+    ['time_series_numeric', 'time_series_numeric_indicators']
+  start_key:
+    'ts_start_idx'
+  seq_len_key:
+    'ts_seqlens'
+  precache_data:
+    true
+  k_folds:
+    5
+  other_dsets_to_cache:
+    NULL
+model:
+  # Learning Configuration
+  optimizer:
+    'adam'
+  lr:
+    '1e-3'
+  dropout:
+    0.2
+  weight_decay:
+    '1e-4'
+  # Training Configuration
+  batch_size:
+    64
+  patience:
+    3
+  monitor:
+    'val_auroc_mean'
+  mode:
+    'max'
+  save_dir:
+    'required'
+  # Resource Usage Settings
+  gpus:
+    1  # Number of GPUs to use
+  n:
+    NULL  # To quickly debug, set n to an integer # of samples for quickly making sure everything works
+  num_workers:
+    2
+  # Model Structure Settings
+  mutually_exclusive:
+    false
+  continuous_pred:
+    false
+  which:
+    'static_and_time_series'
+  hidden_dim:
+    64
+  activation:
+    'torch.nn.ReLU'
+  seq_time_series_label:
+    'time_series'
+  static_time_series_label:
+    NULL
+  static_label:
+    'static'
+  n_intraop_time_series_seq_layers:
+    1
+  key_static_continuous:
+    'static_numeric'
+  key_static_continuous_indicator:
+    'static_numeric_indicators'
+  key_static_binary:
+    'static_binary'
+  key_static_binary_indicator:
+    'static_binary_indicators'
+  key_static_embedding:
+    'static_cat_embedding'
+  key_time_series_continuous:
+    'time_series_numeric'
+  key_time_series_continuous_indicator:
+    'time_series_numeric_indicators'
+  key_intraop_time_series_static_continuous:
+    NULL
+  key_intraop_time_series_static_continuous_indicator:
+    NULL
+  target_idx:
+    ['prolonged_icu_stay']  # ['hospital_mortality', 'prolonged_icu_stay']

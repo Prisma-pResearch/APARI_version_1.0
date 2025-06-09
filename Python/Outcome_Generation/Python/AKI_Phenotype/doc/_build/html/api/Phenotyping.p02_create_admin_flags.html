@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p02_create_admin_flags &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p03_add_prev_creatinine_and_egfr_flags" href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" />
+    <link rel="prev" title="p01_load_filter_file" href="Phenotyping.p01_load_filter_file.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" title="p03_add_prev_creatinine_and_egfr_flags"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_load_filter_file.html" title="p01_load_filter_file"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p02_create_admin_flags</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p02-create-admin-flags">
+<h1>p02_create_admin_flags<a class="headerlink" href="#p02-create-admin-flags" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p02_create_admin_flags">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p02_create_admin_flags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p02_create_admin_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function creates patient history flag, specific history disease flags(aki, ckd, dialysis, kidneyTransplant, esrd) based on the patient history code.</p>
+<ol class="arabic simple">
+<li><p>Load filtered encounter, diagnosis, and procedure files in the intermediate file directory as dataframes</p></li>
+<li><dl class="simple">
+<dt>Concatenate diagnosis and procedure dataframes, inner join with encounter dataframe using pid, and filter to 3 following dataframe</dt><dd><ul class="simple">
+<li><p>history_codes: filter code_date &lt;= admit_date.</p></li>
+<li><p>cpt_codes: filter code_date &lt;= admit_date and code_type = CPT.</p></li>
+<li><p>diagnose_codes: filter code_date &lt;= admit_date and code_type != CPT.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Use the above 3 dataframes’ encounter ids to label ‘ICD9_10flagDiagnosis’, ‘ICD9_10flagProcedures’, and ‘finalICD910’ flag columns with 1 as indicator of code present and 0 as not present.</p></li>
+<li><dl class="simple">
+<dt>Add history disease admin flags for aki, dialysis, kidneyTransplant, and ckd using encounter, history_codes dataframes and disease code lists. New columns introduced:</dt><dd><ul class="simple">
+<li><p>disease_code_date: latest code date for specific disease from diagnosis file</p></li>
+<li><p>disease_code: specific disease code from diagnosis file</p></li>
+<li><p>disease_icd_type: specific disease icd type from diagnosis file</p></li>
+<li><p>disease_cpt_code: specific disease cpt code from procedure file</p></li>
+<li><p>disease_cpt_date: latest code date for specific disease from procedure file</p></li>
+<li><p>disease_admin_flag: admin flag column with 1 as indicator of code present and 0 as not present in patient disease history.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Use esrd_basic_codes &amp; esrd_dialysis_codes &amp; esrd_dialysis_aki_codes lists and aki_admin_flag &amp; dialysis_admin_flag columns to locate ESRD condition in both diagnosis and procedure files. New columns introduced:</dt><dd><ul class="simple">
+<li><p>esrd_code: ESRD code from diagnosis file</p></li>
+<li><p>esrd_code_date: latest code date for ESRD from diagnosis file</p></li>
+<li><p>esrd_cpt_code: ESRD code from procedure file</p></li>
+<li><p>esrd_cpt_date: latest code date for ESRD from procedure file</p></li>
+<li><p>esrd_admin_flag: admin flag column with 1 as indicator of ESRD present and 0 as not present in patient disease history.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Adjust CKD admin flag based on esrd_admin_flag. If esrd_admin_flag = 1, adjust ckd_admin_flag to 0 and remove all corresponding code and code_date for both procedure and diagnosis</p></li>
+<li><p>Save final file to intermediate directory in csv format.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> (<em>str</em>) – intermediate file directory</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>eid</strong> (<em>str</em>) – encounter id column name</p></li>
+<li><p><strong>pid</strong> (<em>str</em>) – patient id column name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p01_load_filter_file.html"
+                        title="previous chapter">p01_load_filter_file</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html"
+                        title="next chapter">p03_add_prev_creatinine_and_egfr_flags</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p02_create_admin_flags.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p03_add_prev_creatinine_and_egfr_flags.html" title="p03_add_prev_creatinine_and_egfr_flags"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p01_load_filter_file.html" title="p01_load_filter_file"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p02_create_admin_flags</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

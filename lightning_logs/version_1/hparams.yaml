@@ -1,0 +1,186 @@
+config:
+  activation: !!python/name:torch.nn.modules.activation.ReLU ''
+  batch_size: 32
+  class_weights:
+  - - 0.5101490988015476
+    - 25.132728963272896
+  continuous_pred: false
+  dataset:
+    batch_dset_map:
+      static_binary:
+        dtype: torch.FloatTensor
+        h5_ds_key: static_binary
+      static_binary_indicators:
+        dtype: torch.FloatTensor
+        h5_ds_key: static_binary_missing_ind
+      static_cat_embedding:
+        dtype: torch.LongTensor
+        h5_ds_key: static_cat_embedding
+      static_numeric:
+        dtype: torch.FloatTensor
+        h5_ds_key: static_numeric
+      static_numeric_indicators:
+        dtype: torch.FloatTensor
+        h5_ds_key: static_numeric_missing_ind
+      time_series_numeric:
+        dtype: torch.FloatTensor
+        h5_ds_key: time_series_numeric
+      time_series_numeric_indicators:
+        dtype: torch.FloatTensor
+        h5_ds_key: time_series_numeric_missing_ind
+      y:
+        dtype: torch.FloatTensor
+        h5_ds_key: y
+    cat_embedding_key:
+      static_cat_embedding: static_cat_embedding
+    filter_columns:
+    - poa_cci_aids
+    - poa_diabetes
+    - poa_cci_pud
+    - poa_icancer
+    - poa_icvd
+    - poa_ichf
+    - poa_cci_dementia
+    - poa_cci_diabwc
+    - poa_imi
+    - poa_imcancer
+    - poa_cci_msld
+    - poa_cci_hp
+    - seen_in_ed_yn
+    - asa_score_numeric
+    - asa_score_2
+    - asa_score_3
+    - asa_score_4
+    - asa_score_5
+    - asa_score_6
+    - admit_e_sofa_1_plus
+    - admit_e_sofa_2_plus
+    - admit_e_sofa_3_plus
+    - admit_e_sofa_4_plus
+    - preop_e_sofa_1_plus
+    - preop_e_sofa_2_plus
+    - preop_e_sofa_3_plus
+    - preop_e_sofa_4_plus
+    - any_preop_rbc
+    - any_intraop_rbc
+    - admit_priority_emergent
+    - admit_priority_elective
+    - admit_priority_trauma_alert
+    - admit_priority_urgent
+    - gender_concept_id_female
+    - pre_op_station_ward
+    - pre_op_station_icu
+    - pre_op_station_emergency_department
+    - pre_op_station_other
+    - poa_icpd
+    - payer_concept_id_blue_cross
+    - payer_concept_id_commercial
+    - payer_concept_id_federal_non_cms
+    - payer_concept_id_managed_care
+    - payer_concept_id_medicaid
+    - payer_concept_id_medicaid_hmo
+    - payer_concept_id_medicare
+    - payer_concept_id_medicare_hmo
+    - smoking_status_current
+    - smoking_status_former
+    - smoking_status_never
+    - smoking_status_unknown
+    - surgical_service_ent
+    - surgical_service_general
+    - surgical_service_neurosurgery
+    - surgical_service_ob_gyn
+    - surgical_service_oral
+    - surgical_service_ortho
+    - surgical_service_podiatry
+    - surgical_service_ct_surgery
+    - surgical_service_tacs
+    - surgical_service_vascular
+    - surgical_service_urology
+    - procedure_urgency_urgent
+    - procedure_urgency_emergent
+    - procedure_urgency_elective
+    - age
+    - poa_cci
+    - preop_e_sofa
+    - admit_e_sofa
+    - adi_natrank
+    - adi_staterank
+    - preop_rbc_volume
+    - intraop_rbc_volume
+    - primary_procedure
+    - surgery_provider_id
+    - body_temperature
+    - diastolic_blood_pressure
+    - etco2
+    - heart_rate
+    - pip
+    - respiratory_rate
+    - spo2
+    - systolic_blood_pressure
+    - tidal_volume
+    h5_N_key: static_binary
+    h5_file: Z:Data\dataset\all_APARI_dataset_v1.0.h5
+    interpretable_keys:
+    - static_numeric
+    - static_numeric_indicators
+    - static_binary
+    - static_binary_indicators
+    - time_series_numeric
+    - time_series_numeric_indicators
+    - intraop_static_continuous
+    - intraop_static_continuous_indicators
+    k_folds: 5
+    other_dsets_to_cache: null
+    precache_data: true
+    seq_len_key: ts_seqlens
+    start_key: ts_start_idx
+    target_outcome_index: hospital_mortality
+    variable_length_seq_keys:
+    - time_series_numeric
+    - time_series_numeric_indicators
+  dim_static_binary: 56
+  dim_static_binary_indicator: 0
+  dim_static_continuous: 10
+  dim_static_continuous_indicator: 0
+  dim_static_embedding: 2
+  dim_time_series_continuous: 9
+  dim_time_series_continuous_indicator: 0
+  dropout: 0.1
+  facility_zip: all
+  gpus: 0
+  hidden_dim: 64
+  key_static_binary: static_binary
+  key_static_binary_indicator: static_binary_indicators
+  key_static_continuous: static_numeric
+  key_static_continuous_indicator: static_numeric_indicators
+  key_static_embedding: static_cat_embedding
+  key_time_series_continuous: time_series_numeric
+  key_time_series_continuous_indicator: time_series_numeric_indicators
+  lr: 0.0001
+  mode: max
+  model_name: model
+  monitor: val_auroc_mean
+  mutually_exclusive: false
+  n: null
+  n_intraop_time_series_seq_layers: 1
+  n_targets: 1
+  n_time_series_layers: 1
+  num_workers: 4
+  optimizer: adam
+  outcomes:
+  - hospital_mortality
+  patience: 3
+  save_dir: Z:Results\model\all
+  save_path: Z:Results\model\all\2024-07-19_09-28-13
+  seq_time_series_label: time_series
+  static_embedding_levels:
+  - 1358
+  - 551
+  static_label: static
+  static_time_series_label: null
+  target_idx: hospital_mortality
+  test_group: Test
+  train_group: Development
+  val_group: Validation
+  weight_decay: 0.0001
+  which: static_and_time_series

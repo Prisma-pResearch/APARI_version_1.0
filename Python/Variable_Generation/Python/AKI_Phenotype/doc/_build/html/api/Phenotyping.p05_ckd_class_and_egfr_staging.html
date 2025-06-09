@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p05_ckd_class_and_egfr_staging &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p05_find_final_class" href="Phenotyping.p05_find_final_class.html" />
+    <link rel="prev" title="p04_create_creatinine_parameters" href="Phenotyping.p04_create_creatinine_parameters.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_final_class.html" title="p05_find_final_class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p04_create_creatinine_parameters.html" title="p04_create_creatinine_parameters"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_ckd_class_and_egfr_staging</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p05-ckd-class-and-egfr-staging">
+<h1>p05_ckd_class_and_egfr_staging<a class="headerlink" href="#p05-ckd-class-and-egfr-staging" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p05_ckd_class_and_egfr_staging">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p05_ckd_class_and_egfr_staging</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inmd_dir</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">race_correction</span><span class="p">:</span> <span class="n">bool</span></em>, <em class="sig-param"><span class="n">pid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">eid</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">batch</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p05_ckd_class_and_egfr_staging" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to determine CKD classes and G-stage of CKD if having CKD.</p>
+<dl class="simple">
+<dt>Action items:</dt><dd><ol class="arabic simple">
+<li><p>Read saved encounter file containing creatinine parameters</p></li>
+<li><p>Calculate mdrd value for each encounter</p></li>
+<li><p>Determine the most recent date of kidney transplant, esrd and aki before admission using recorded diagnosis and procedure codes</p></li>
+<li><p>Determine detailed ckd class using admission creatinine, mdrd, diagnosis code history etc.</p></li>
+<li><p>Determine reference creatinine using minimum of [admission creatinine, minimum creatinine within 1-7 days before admission, medium creatinine within 8-365 days before admission, and mdrd (if do not have ckd)]</p></li>
+<li><p>Calculate egfr for each encounter using reference creatinine</p></li>
+<li><p>Determine the G-stage of CKD for those patients with CKD</p></li>
+<li><dl class="simple">
+<dt>Save resulting encounter file with newly generated columns. New columns include:</dt><dd><ul class="simple">
+<li><p>final_class</p></li>
+<li><p>egfr</p></li>
+<li><p>egfr_staging</p></li>
+<li><p>reference_creatinine</p></li>
+<li><p>method</p></li>
+<li><p>ckd</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inmd_dir</strong> (<em>str</em>) – intermediate file directory</p></li>
+<li><p><strong>batch</strong> (<em>int</em>) – batch number, default value = 0</p></li>
+<li><p><strong>race_correction</strong> (<em>bool</em>) – flag for using race agnostic for eGFR and mdrd calculation, default value = True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Can add flowchart for how do we determine determined CKD class, and G-stage</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p04_create_creatinine_parameters.html"
+                        title="previous chapter">p04_create_creatinine_parameters</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_find_final_class.html"
+                        title="next chapter">p05_find_final_class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p05_ckd_class_and_egfr_staging.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_final_class.html" title="p05_find_final_class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p04_create_creatinine_parameters.html" title="p04_create_creatinine_parameters"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_ckd_class_and_egfr_staging</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

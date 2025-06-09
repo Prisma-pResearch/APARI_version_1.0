@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p05_get_CKD_class &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p05_get_egfr_stage" href="Phenotyping.p05_get_egfr_stage.html" />
+    <link rel="prev" title="p05_find_subgroup" href="Phenotyping.p05_find_subgroup.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_egfr_stage.html" title="p05_get_egfr_stage"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_subgroup.html" title="p05_find_subgroup"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_get_CKD_class</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p05-get-ckd-class">
+<h1>p05_get_CKD_class<a class="headerlink" href="#p05-get-ckd-class" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p05_get_CKD_class">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p05_get_CKD_class</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">detailed_ckd_class</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p05_get_CKD_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to generate overall ckd class ([‘0’, ‘1’, ‘ESRD’, ‘Insufficient Data’]). A ckd class with ‘1’/’0’ indicates patients have/do not have
+CKD determined by medical history and creatinine. A ckd class with ‘Insufficient Data’ indicates patients do not have enough information to determine CKD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>detailed_ckd_class</strong> (<em>str</em>) – <dl class="simple">
+<dt>detailed ckd class belongs to one of following</dt><dd><p>’ESRD’,’ESRD with Warning’,
+‘AKD on Admission, CKD by Creatinine Criteria’,’AKD on Admission, CKD by Medical History’,
+‘CKD by Creatinine Criteria’,’CKD by Medical History’,’Recovered AKI on Admission, CKD by Medical History’,
+‘CKD after kidney transplant by Medical History’,’Recovered AKI on Admission, CKD by Creatinine Criteria’,
+‘AKD on Admission, CKD after kidney transplant by Medical History’,
+‘Recovered AKI on Admission, CKD after kidney transplant by Medical History’,
+‘AKD on Admission, No CKD by Medical History’,’AKD on Admission, No CKD by Medical History Or Creatinine Criteria’,
+‘Insufficient Data’,’No CKD by Medical History Or Creatinine Criteria’,
+‘Recovered AKI on Admission, No CKD by Medical History’,
+‘Recovered AKI on Admission, No CKD by Medical History Or Creatinine Criteria’</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>overall ckd class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_find_subgroup.html"
+                        title="previous chapter">p05_find_subgroup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_get_egfr_stage.html"
+                        title="next chapter">p05_get_egfr_stage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p05_get_CKD_class.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_egfr_stage.html" title="p05_get_egfr_stage"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_subgroup.html" title="p05_find_subgroup"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_get_CKD_class</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

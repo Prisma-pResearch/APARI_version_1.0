@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>p05_find_subgroup &#8212; IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="p05_get_CKD_class" href="Phenotyping.p05_get_CKD_class.html" />
+    <link rel="prev" title="p05_find_ref_method" href="Phenotyping.p05_find_ref_method.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_CKD_class.html" title="p05_get_CKD_class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_ref_method.html" title="p05_find_ref_method"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_find_subgroup</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="p05-find-subgroup">
+<h1>p05_find_subgroup<a class="headerlink" href="#p05-find-subgroup" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="Phenotyping.p05_find_subgroup">
+<code class="sig-prename descclassname">Phenotyping.</code><code class="sig-name descname">p05_find_subgroup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ckd_str</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">aki_flg</span></em>, <em class="sig-param"><span class="n">aki_date</span></em>, <em class="sig-param"><span class="n">adm_date</span></em>, <em class="sig-param"><span class="n">adm_cr</span></em>, <em class="sig-param"><span class="n">mdrd</span></em>, <em class="sig-param"><span class="n">warning</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Phenotyping.p05_find_subgroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is a subfunction of p05_find_final_class which determines detailed ckd class.</p>
+<ol class="arabic simple">
+<li><p>If warning is true and if admission_creatinine &gt; 0 or if admission_creatinine / MDRD &gt;= 1.5, return value as ‘ESRD’. Else return as ‘ESRD with Warning’.</p></li>
+<li><p>If aki_admin_flag is 1 and the difference between admission date and AKI date &lt;= 90 days and if admission_creatinine &gt; 0 or if admission_creatinine / MDRD &gt;= 1.5, return value as ‘AKD on Admission, ‘ + description of CKD. Else return as ‘Recovered AKI on Admission, ‘ + description of CKD</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ckd_str</strong> (<em>str</em>) – detailed ckd class, indicating if result is determined by medical history or creatinine criteria</p></li>
+<li><p><strong>aki_flg</strong> (<em>int</em>) – indicator for aki by medical history</p></li>
+<li><p><strong>aki_date</strong> (<em>date</em>) – most recent date of aki by medical history</p></li>
+<li><p><strong>adm_date</strong> (<em>date</em>) – admission date</p></li>
+<li><p><strong>adm_cr</strong> (<em>float</em>) – admission creatinine</p></li>
+<li><p><strong>mdrd</strong> (<em>float</em>) – mdrd value</p></li>
+<li><p><strong>warning</strong> (<em>bool</em>) – False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>detailed ckd class</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_find_ref_method.html"
+                        title="previous chapter">p05_find_ref_method</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Phenotyping.p05_get_CKD_class.html"
+                        title="next chapter">p05_get_CKD_class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/Phenotyping.p05_find_subgroup.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_get_CKD_class.html" title="p05_get_CKD_class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Phenotyping.p05_find_ref_method.html" title="p05_find_ref_method"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">IDEALIST PRISMAP AKI CKD Phenotyping Pipeline  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">p05_find_subgroup</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, PRISMAP.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+[submodule "Python/Utilities"]
+	path = Python/Utilities
+	url = https://github.com/Prisma-pResearch/Utilities
+[submodule "Python/AKI_Phenotype"]
+	path = Python/AKI_Phenotype
+	url = https://github.com/Prisma-pResearch/AKI-Phenotype
