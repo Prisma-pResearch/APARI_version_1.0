@@ -1,0 +1,21 @@
+
+## Data Preprocessing Workflow
+### Step 1: Cohort inclusive criteria (SQL)
+admit datetime is within study period
+patient's age 18 years or greater at time of admission
+encounter type is inpatient or observation
+encounters have the first surgery
+hospital admission for 24 hours or greater
+first surgery duration was 20 minutes or greater
+surgery start and stop times are available
+admission and discharge dates are available
+With the inclusive criteria, we created the SQL query to extract the cohort data from OMOP database.
+
+
+Please check the SQL/eligibility_criteria.sql, it defines the cohort inclusive criteria. Other SQL queries are referenced on the same cohort.
+
+### Step 2: Download Data
+Data will be queried in batches from the MS SQL SERVER database referenced in the .ENV file to .../Data/source_data. Depending on the number of pateints in the eligiblity cohort, this data download can be done in minutes to days.
+
+### Step 3: Standardize Data and package into .hd5 file
+Source files will be standardized using lookup tables that harmonize equivalent concepts from various OMOP vocabularies and numerical ranges will be scaled to mean(0) unit std deviation to reduce bias associated with the range of each feature. The resultant dataframes will be packaged into a high density file format file that is usable by the model.
