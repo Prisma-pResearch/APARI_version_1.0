@@ -101,11 +101,16 @@ def train(config: dict, train_data: Dataset, val_data: Union[Dataset, List[Datas
 
 def get_predictions(model, data: Dataset, config: dict, return_actual: bool = True):
     data_loader = data.loader(batch_size=config['batch_size'], n=config['n'], shuffle=False, num_workers=config['num_workers'])
-    model = model.eval()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = model.to(device).eval()
+    print(f"✅ Model is on: {next(model.parameters()).device}")
 
     y_true_list, y_pred_list = [], []
     with torch.no_grad():
         for batch in data_loader:
+            # Move only tensor elements in batch to GPU/CPU
+            batch = {key: val.to(device) if isinstance(val, torch.Tensor) else val
+                      for key, val in batch.items()}
             outputs = model(batch, train=False, return_actual=return_actual)
             y_pred_list.append(outputs['y_pred'].cpu().numpy())
             if return_actual:
