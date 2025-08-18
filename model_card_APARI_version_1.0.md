@@ -108,6 +108,16 @@ Two foreseeable characteristics that will influence how the model behaves includ
 ### Metrics
 
 Model performance was evaluated on the validation cohort by calculating area under the receiver operating characteristic curve (AUROC), area under the precision-recall curve (AUPRC), and by calculating Youden’s index to derive an optimal classification threshold for evaluating sensitivity, specificity, positive predictive value, negative predictive value, and F1 score. Ninety-five percent confidence intervals were computed for each metric using bootstrapping with 1,000 iterations. 
+| Metric        | Prolonged ICU Stay          | Hospital Mortality        |
+| ------------- | --------------------------- | ------------------------- |
+| Prevalence    | 19.3%                       | 1.02%                     |
+| AUROC         | 0.920 (0.916-0.923)         | 0.925 (0.909-0.940)       |
+| AUPRC         | 0.755 (0.734-0.770)         | 0.227 (0.175-0.304)       |
+| Sensitivity   | 0.868 (0.836-0.881)         | 0.889 (0.868-0.993)       |
+| Specificity   | 0.816 (0.809-0.848)         | 0.819 (0.724-0.879)       |
+| PPV           | 0.531 (0.519-0.575)         | 0.048 (0.032-0.069)       |
+| NPV           | 0.963 (0.955-0.967)         | 0.999 (0.998-0.999)       |
+| F1 score      | 0.659 (0.650-0.686)         | 0.091 (0.062-0.128)       |
 
 ## Results 
 
