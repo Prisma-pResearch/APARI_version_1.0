@@ -261,11 +261,37 @@ tyler.loftus@surgery.ufl.edu
 
 # How to Get Started with the Model
 
-Use the code below to get started with the model.
+Use the code below to load a pretrained APARI checkpoint and generate predictions.
 
 <details>
 <summary> Click to expand </summary>
 
-More information needed
 
-</details>
+```python
+import torch
+from Python.Model_Toolbox.Python.Pytorch.Model_and_Layers import Model
+from Python.Model_Toolbox.Python.Pytorch.Training import load_data, get_predictions
+
+# 1. Select model checkpoint (inside Best_Model folder of this repo)
+ckpt_path = "Best_Model/best_mortality_model.ckpt"  # or Best_Model/best_prolonged_icu_model.ckpt
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# 2. Load model
+checkpoint = torch.load(ckpt_path, map_location=device, weights_only=False)
+config = checkpoint['hyper_parameters']['config'].copy()
+config['dataset']['h5_file'] = "your_dataset.h5"  # path to your preprocessed dataset in H5 format
+
+model = Model.load_from_checkpoint(ckpt_path, config=config, map_location=device)
+model.to(device)
+model.eval()
+
+# 3. Load dataset (train/val/test splits, here we just use test)
+_, _, test_data = load_data(config=config)
+
+# 4. Generate predictions
+predictions_df = get_predictions(model=model, data=test_data, config=config)
+
+# 5. Inspect results
+print(predictions_df.head())  #output a DataFrame containing subject IDs, true labels, and predicted probabilities for the chosen outcome.
+
+
