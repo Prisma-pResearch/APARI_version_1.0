@@ -160,7 +160,7 @@ Patient outcomes in the testing cohort are summarized here:
 | Costs for hospital admission, $K, median [IQR] | 15.9 [9.8-22.3] | 10.7 [7.0-17.6] | 21.8 [13.3-34.9] | 21.9 [13.1-36.3] |
 | Value of care, median [IQR] | 0.2 [0.1-0.3] | 1.5 [0.9-2.2] | 0.8 [0.5-1.3] | 1.2 [0.7-2.0] |
 
-IQR: interquartile range, ICU: intensive care unit.  
+IQR: interquartile range, ICU: intensive care unit. we calculated value of care as inverted observed-to-expected in-hospital mortality and prolonged ICU stay ratios divided by median total costs and multiplied by a constant to set value of care for the entire study population to 1, as adapted from Yount, Jones, and colleagues (Yount KW, Turrentine FE, Lau CL, Jones RS. Putting the value framework to work in surgery. J Am Coll Surg. 2015 Apr;220(4):596-604.). 
 
 ### Factors
 
@@ -168,7 +168,7 @@ Two foreseeable characteristics that will influence how the model behaves includ
 
 ### Metrics
 
-Model performance was evaluated on the validation cohort by calculating area under the receiver operating characteristic curve (AUROC), area under the precision-recall curve (AUPRC), and by calculating Youden’s index to derive an optimal classification threshold for evaluating sensitivity, specificity, positive predictive value, negative predictive value, and F1 score. Ninety-five percent confidence intervals were computed for each metric using bootstrapping with 1,000 iterations. 
+Model discrimination was evaluated on the holdout test cohort by calculating area under the receiver operating characteristic curve (AUROC), area under the precision-recall curve (AUPRC), and by calculating Youden’s index to derive an optimal classification threshold for evaluating sensitivity, specificity, positive predictive value, negative predictive value, accuracy and F1 score. Calibration was assessed by calculating Brier scores. Ninety-five percent confidence intervals were computed for each metric using bootstrapping with 1,000 iterations. 
 | Metric        | Prolonged ICU Stay          | In-hospital Mortality     |
 | ------------- | --------------------------- | ------------------------- |
 | Prevalence    | 9.6%                        | 2.1%                      |
