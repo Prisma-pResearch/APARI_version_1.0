@@ -1,21 +1,3 @@
+The APARI (Aligning Patient Acuity with Resource Intensity) model generates predictions of in-hospital mortality and prolonged (greater than 48h) intensive care unit (ICU) stay for patients who are undergoing major surgery. Features include electronic health record (EHR) information available before and during surgery. Model predictions are used to identify high-acuity patients who are planned for postoperative admission to low-acuity hospital floor units and low-acuity patients who are planned for postoperative admission to high-acuity ICUs, and provides decision support for doctors to rethink the triage destination.
 
-## Data Preprocessing Workflow
-### Step 1: Cohort inclusive criteria (SQL)
-admit datetime is within study period
-patient's age 18 years or greater at time of admission
-encounter type is inpatient or observation
-encounters have the first surgery
-hospital admission for 24 hours or greater
-first surgery duration was 20 minutes or greater
-surgery start and stop times are available
-admission and discharge dates are available
-With the inclusive criteria, we created the SQL query to extract the cohort data from OMOP database.
-
-
-Please check the SQL/eligibility_criteria.sql, it defines the cohort inclusive criteria. Other SQL queries are referenced on the same cohort.
-
-### Step 2: Download Data
-Data will be queried in batches from the MS SQL SERVER database referenced in the .ENV file to .../Data/source_data. Depending on the number of pateints in the eligiblity cohort, this data download can be done in minutes to days.
-
-### Step 3: Standardize Data and package into .hd5 file
-Source files will be standardized using lookup tables that harmonize equivalent concepts from various OMOP vocabularies and numerical ranges will be scaled to mean(0) unit std deviation to reduce bias associated with the range of each feature. The resultant dataframes will be packaged into a high density file format file that is usable by the model.
+Please see the Model Card for full details.
