@@ -1,3 +1,3 @@
 The APARI (Aligning Patient Acuity with Resource Intensity) model generates predictions of in-hospital mortality and prolonged (greater than 48h) intensive care unit (ICU) stay for patients who are undergoing major surgery. Features include electronic health record (EHR) information available before and during surgery. Model predictions are used to identify high-acuity patients who are planned for postoperative admission to low-acuity hospital floor units and low-acuity patients who are planned for postoperative admission to high-acuity ICUs, and provides decision support for doctors to rethink the triage destination.
 
-Please see the Model Card for full details.
+Please see the Model Card (model_card_APARI_version_1.0.md) for full details.
