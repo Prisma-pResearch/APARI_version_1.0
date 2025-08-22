@@ -207,7 +207,7 @@ Carbon emissions can be estimated using the [Machine Learning Impact calculator]
 - **Hardware Type:** GPUs
 - **Hours used:** 46
 - **Cloud Provider:** Private Infrastructure
-- **Carbon Emitted:** 4.97 kg 
+- **Carbon Emitted:** 4.97 kg (this is similar to driving an average-sized, gasoline-powered car for about 20 miles)
 
 # Technical Specifications
 
