@@ -47,7 +47,7 @@ The APARI (Aligning Patient Acuity with Resource Intensity) model generates pred
 - **Model type:** tabular-regression
 - **Language(s) (NLP):** eng
 - **License:** gpl
-- **Resources for more information:** More information needed
+- **Resources for more information:**
     - [GitHub Repo](https://github.com/Prisma-pResearch/APARI_version_1.0)
     - [Associated Paper](Loftus TJ, Ruppert MM, Shickel B, Ozrazgat-Baslanti T, Balch JA, Hu D, Javed A, Madbak F, Skarupa DJ, Guirgis F, Efron PA, Tighe PJ, Hogan WR, Rashidi P, Upchurch GR Jr, Bihorac A. Overtriage, Undertriage, and Value of Care after Major Surgery: An Automated, Explainable Deep Learning-Enabled Classification System. J Am Coll Surg. 2023 Feb 1;236(2):279-291. doi: 10.1097/XCS.0000000000000471. Epub 2022 Nov 8. PMID: 36648256; PMCID: PMC9993068.)
 
