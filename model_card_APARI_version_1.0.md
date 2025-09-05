@@ -47,6 +47,33 @@ The APARI (Aligning Patient Acuity with Resource Intensity) model generates pred
 - **Model type:** tabular-regression
 - **Language(s) (NLP):** eng
 - **License:** gpl
+- **Patents: **
+- SYSTEMS AND METHODS FOR USING DEEP LEARNING TO GENERATE ACUITY SCORES FOR CRITICALL ILL OR INJURED PATIENTS
+Patent No.: US 12,340,905 B2
+Date of Patent: Jun. 24, 2025
+Inventors: Azra Bihorac, Gainesville, FL (US);
+Tyler J. Loftus, Gainesville, FL (US);
+Tezcan Ozrazgat Baslanti, Gainesville, FL (US); 
+Parisa Rashidi, Gainesville, FL (US); 
+Benjamin P. Shickel, Alachua, FL (US)
+Assignee: University of Florida Research
+Foundation, Incorporated, Gainesville, FL (US)
+
+METHOD AND APARATUS FOR PREDICTION OF COMPLICATIONS AFTER SURGERY
+Patent No.: US 12,014,832 B2
+Date of Patent: Jun. 18, 2024
+Inventors: Azra Bihorac (US);
+Xiaolin Li (US);
+Parisa Rashidi (US);
+Panagote Pardalos (US);
+Tezcan Ozrazgat Baslanti (US); 
+William Hogan (US);
+Daisy Zhe Wang (US);
+Petar Momvilovic (US);
+Gloria Lipori (US)
+Assignee: University of Florida Research
+Foundation, Incorporated, Gainesville, FL (US)
+
 - **Resources for more information:**
     - [GitHub Repo](https://github.com/Prisma-pResearch/APARI_version_1.0)
     - [Associated Paper](Loftus TJ, Ruppert MM, Shickel B, Ozrazgat-Baslanti T, Balch JA, Hu D, Javed A, Madbak F, Skarupa DJ, Guirgis F, Efron PA, Tighe PJ, Hogan WR, Rashidi P, Upchurch GR Jr, Bihorac A. Overtriage, Undertriage, and Value of Care after Major Surgery: An Automated, Explainable Deep Learning-Enabled Classification System. J Am Coll Surg. 2023 Feb 1;236(2):279-291. doi: 10.1097/XCS.0000000000000471. Epub 2022 Nov 8. PMID: 36648256; PMCID: PMC9993068.)
