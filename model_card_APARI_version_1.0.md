@@ -47,8 +47,7 @@ The APARI (Aligning Patient Acuity with Resource Intensity) model generates pred
 - **Model type:** tabular-regression
 - **Language(s) (NLP):** eng
 - **License:** gpl
-- **Patents: **
-SYSTEMS AND METHODS FOR USING DEEP LEARNING TO GENERATE ACUITY SCORES FOR CRITICALL ILL OR INJURED PATIENTS
+- **Patents:** SYSTEMS AND METHODS FOR USING DEEP LEARNING TO GENERATE ACUITY SCORES FOR CRITICALL ILL OR INJURED PATIENTS
 Patent No.: US 12,340,905 B2
 Date of Patent: Jun. 24, 2025
 Inventors: Azra Bihorac, Gainesville, FL (US);
