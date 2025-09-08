@@ -58,7 +58,8 @@ Parisa Rashidi, Gainesville, FL (US);
 Benjamin P. Shickel, Alachua, FL (US).
 Assignee: University of Florida Research
 Foundation, Incorporated, Gainesville, FL (US).
-    - METHOD AND APARATUS FOR PREDICTION OF COMPLICATIONS AFTER SURGERY.
+    - The APARI model evolved from The MySurgeryRisk model (view Model card at: http://10.14.133.29:38010/Doc version of model card), which is further described by: 
+METHOD AND APARATUS FOR PREDICTION OF COMPLICATIONS AFTER SURGERY.
 Patent No.: US 12,014,832 B2.
 Date of Patent: Jun. 18, 2024.
 Inventors: Azra Bihorac (US);
