@@ -81,15 +81,15 @@ Foundation, Incorporated, Gainesville, FL (US).
 
 ## Direct Use
 
-Generating predictions of in-hospital mortality and prolonged (48h or greater) ICU stay among adult (age 18 years or greater) patients who are undergoing major surgery.
+Generating predictions of in-hospital mortality and prolonged (48h or greater) ICU stay among adult (age 18 years or greater) patients who are undergoing major surgery. 
 
 ## Downstream Use 
 
-Model predictions are used to identify high-acuity patients who are planned for postoperative admission to low-acuity hospital floor units and low-acuity patients who are planned for postoperative admission to high-acuity ICUs, and provides decision support for doctors to rethink the triage destination.
+Model predictions are used to identify high-acuity patients who are planned for postoperative admission to low-acuity hospital floor units and low-acuity patients who are planned for postoperative admission to high-acuity ICUs, and provides advisories for for doctors to rethink the triage destination, and is not for direct clinical decision-making.
 
 ## Out-of-Scope Use
 
-Outpatient operations, hospital admissions lasting less than 24 hours, operations performed on children (age less than 18 years).
+Outpatient operations, hospital admissions lasting less than 24 hours, operations performed on children (age less than 18 years), not for direct clinical decision-making.
 
 # Bias, Risks, and Limitations
 
