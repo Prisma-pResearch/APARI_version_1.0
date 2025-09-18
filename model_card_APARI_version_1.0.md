@@ -46,7 +46,7 @@ The APARI (Aligning Patient Acuity with Resource Intensity) model generates pred
 - **Funded by:** National Institutes of Health (NIH), National Institute of General Medical Sciences (NIGMS)
 - **Model type:** tabular-regression
 - **Language(s) (NLP):** eng
-- **License:** gpl
+- **License:** ©Copyright 2025 University of Florida Research Foundation, Inc. All Commercial Rights Reserved. This model is released for academic and non-profit research and for educational use only. Commercial use requires a license from University of Florida Research Foundation.  
 - **Patents:**
     - SYSTEMS AND METHODS FOR USING DEEP LEARNING TO GENERATE ACUITY SCORES FOR CRITICALL ILL OR INJURED PATIENTS.
 Patent No.: US 12,340,905 B2.
