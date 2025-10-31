@@ -17,10 +17,11 @@
     - [Preprocessing](#preprocessing)
     - [Speeds, Sizes, Times](#speeds-sizes-times)
 - [Evaluation](#evaluation)
-  - [Testing Data, Factors & Metrics](#testing-data-factors--metrics)
+  - [Testing Data, Factors & Metrics & Uncertainty](#testing-data-factors--metrics--uncertainty)
     - [Testing Data](#testing-data)
     - [Factors](#factors)
     - [Metrics](#metrics)
+    - [Model Uncertainty](#model-uncertainty)
   - [Results](#results)
 - [Model Examination](#model-examination)
 - [Environmental Impact](#environmental-impact)
@@ -121,7 +122,7 @@ The model was trained in approximately 2 days when using four GPUs.
  
 # Evaluation
 
-## Testing Data, Factors & Metrics
+## Testing Data, Factors & Metrics & Uncertainty
 
 ### Testing Data
 
@@ -207,6 +208,17 @@ Model discrimination was evaluated on the holdout test cohort by calculating are
 | Accuracy      | 0.79 (0.76-0.81)            | 0.83 (0.72-0.88)          |
 | F1 score      | 0.42 (0.38-0.44)            | 0.17 (0.12-0.21)          |
 | Brier score   | 0.10 (0.10-0.11)            | 0.08 (0.08-0.09)          |
+
+
+### Model Uncertainty
+
+We applied the method of Monte Carlo dropout to derive measures of prediction uncertainty, representing variance across predictions, for each of our deep learning models. Uncertainty results are shown below, where uncertainty is expressed as prediction variance over 100 stochastic trials using dropout at inference time. Monte Carlo dropout was implemented by maintaining active dropout layers during inference, generating multiple predictions for each patient, and calculating the variance across these predictions to quantify model uncertainty.
+| Outcome | Mean Uncertainty (Variance × 1000) | Mean AUROC |
+|---------|-------------------------------------|---------------|
+| hospiyal_mortality | 4.33 | 0.906 |
+| prolonged_icu_stay | 4.05 | 0.872 |
+| dispo_death | 1.63 | 0.900|
+
 
 ## Results 
 
