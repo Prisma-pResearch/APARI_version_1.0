@@ -208,17 +208,9 @@ Model discrimination was evaluated on the holdout test cohort by calculating are
 | Accuracy      | 0.79 (0.76-0.81)            | 0.83 (0.72-0.88)          |
 | F1 score      | 0.42 (0.38-0.44)            | 0.17 (0.12-0.21)          |
 | Brier score   | 0.10 (0.10-0.11)            | 0.08 (0.08-0.09)          |
+| Uncertainty*  |  4.05                       | 1.63                      |
 
-
-### Model Uncertainty
-
-We applied the method of Monte Carlo dropout to derive measures of prediction uncertainty, representing variance across predictions, for each of our deep learning models. Uncertainty results are shown below, where uncertainty is expressed as prediction variance over 100 stochastic trials using dropout at inference time. Monte Carlo dropout was implemented by maintaining active dropout layers during inference, generating multiple predictions for each patient, and calculating the variance across these predictions to quantify model uncertainty.
-| Outcome | Mean Uncertainty (Variance × 1000) | Mean AUROC |
-|---------|-------------------------------------|---------------|
-| hospiyal_mortality | 4.33 | 0.906 |
-| prolonged_icu_stay | 4.05 | 0.872 |
-| dispo_death | 1.63 | 0.900|
-
+*We calculated uncertainty by applying Monte Carlo dropout (i.e., node dropout at inferenec time) and measuring variance across distributions of predictions from 100 stochastic trials. Uncertainty is expressed as mean variance x 10^3.
 
 ## Results 
 
