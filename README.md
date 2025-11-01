@@ -210,7 +210,7 @@ Model discrimination was evaluated on the holdout test cohort by calculating are
 | Brier score   | 0.10 (0.10-0.11)            | 0.08 (0.08-0.09)          |
 | Uncertainty*  |  4.05                       | 1.63                      |
 
-*We calculated uncertainty by applying Monte Carlo dropout (i.e., node dropout at inferenec time) and measuring variance across distributions of predictions from 100 stochastic trials. Uncertainty is expressed as mean variance x 10^3.
+*We calculated uncertainty by applying Monte Carlo dropout (i.e., node dropout at inference time) and measuring variance across distributions of predictions from 100 stochastic trials. Uncertainty is expressed as mean variance x 10^3.
 
 ## Results 
 
